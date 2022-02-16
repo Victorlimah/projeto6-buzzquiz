@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 body {
@@ -11,6 +13,7 @@ body {
 
 /* HEADER */
 header {
+  width: 100vw;
   font-weight: bold;
   font-size: 37px;
   line-height: 43px;
@@ -31,10 +34,9 @@ header {
 .firstScreen {
   width: 90%;
 }
-/* MY QUIZZ */
+
 .firstScreen section div {
   height: 181px;
-  border: 1px dashed #d5d5d5;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -42,22 +44,16 @@ header {
   align-items: center;
 }
 
+/* MY QUIZZ */
+
 .myQuizz div {
+  border: 1px dashed #d5d5d5;
   margin: 100px auto 25px auto;
 }
 
-.firstScreen h3 {
-  width: 100%;
-  text-align: left;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 23px;
-  margin: 20px 0 20px 0;
-}
-
 .myQuizz h3 {
-  width: 75%;
-  margin: 30px 0 50px 0;
+  width: 300px;
+  margin: 30px auto 50px auto;
   font-size: 20px;
   line-height: 23px;
   display: flex;
@@ -80,17 +76,31 @@ header {
 }
 
 /* ALL QUIZZES*/
+.allQuizz {
+  display: flex;
+  flex-wrap: wrap;
+}
+.allQuizz h3:first-child {
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  margin: 20px auto 20px auto;
+}
 .allQuizz div {
   width: 340px;
   height: 181px;
   margin: 0 auto 25px auto;
   position: relative;
-  flex-wrap: wrap;
 }
 
 .allQuizz div img {
   width: 340px;
   height: 181px;
+  object-fit: cover;
+  border-radius: 5px;
+  filter: brightness(60%);
 }
 
 .allQuizz div h3 {
@@ -100,6 +110,42 @@ header {
   align-items: center;
   color: #ffffff;
   position: absolute;
-  bottom: -15px;
+  bottom: 5px;
   left: 30%;
+}
+/* QUIZZ SELECTED */
+.bannerQuizz {
+  width: 100vw;
+  height: 142px;
+  margin: 73px 0 25px 0;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.bannerQuizz img {
+  width: 100%;
+  object-fit: cover;
+  filter: brightness(60%);
+}
+
+/* ESSE TEXTO NÃO TÁ ALINHANDO */
+.bannerQuizz h3 {
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: red;
+  position: absolute;
+  left: 40%;
+  bottom: 50%;
+}
+
+/* CLASSES SUPORT */
+
+.hidden {
+  display: none;
 }

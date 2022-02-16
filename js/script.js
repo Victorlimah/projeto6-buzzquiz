@@ -1,4 +1,8 @@
 const elementAllQuizzes = document.querySelector(".allQuizz");
+const firstScreen = document.querySelector(".firstScreen");
+const secondScreen = document.querySelector(".secondScreen");
+
+let arrayQuizzes = null;
 
 function getQuizzes() {
   elementAllQuizzes.innerHTML = `<h3>Todos os Quizzes</h3>`;
@@ -7,22 +11,42 @@ function getQuizzes() {
   );
 
   promise.then(renderQuizzes);
-  promise.catch(failRenderQuizzes);
+  promise.catch(() => {
+    alert("Fail render quizzes!");
+  });
 }
 
 function renderQuizzes(response) {
-  let arrayQuizzes = response.data;
+  arrayQuizzes = response.data;
+  let id = null;
   arrayQuizzes.forEach((quiz) => {
+    id = quiz.id;
+    // O H3 NÃO TÁ ALINHANDO COM A IMAGEM
     elementAllQuizzes.innerHTML += `
-      <div>
+      <div class="bannerQuizz" onclick="enterQuizz(${id})">
         <img src="${quiz.image}" alt="image quiz ${quiz.id}">
-        <h3>${quiz.title}</h3>
+        <h3>${quiz.title}</h3> 
       </div>`;
   });
 }
 
-function failRenderQuizzes() {
-  alert("Fail render quizzes!");
+function enterQuizz(id) {
+  firstScreen.classList.add("hidden");
+  let quizSelected = searchQuiz(id);
+
+  secondScreen.innerHTML = `
+    <div class="bannerQuizz">
+        <img src="${quizSelected.image}">
+        <h3>${quizSelected.title}</h3>
+      </div>`;
+}
+
+function searchQuiz(id) {
+  for (let i = 0; i < arrayQuizzes.length; i++) {
+    if (id == arrayQuizzes[i].id) {
+      return arrayQuizzes[i];
+    }
+  }
 }
 
 getQuizzes();
