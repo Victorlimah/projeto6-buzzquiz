@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* HEADER */
+header {
+  font-weight: bold;
+  font-size: 37px;
+  line-height: 43px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ec362d;
+  padding: 15px 0 15px 0;
+}
