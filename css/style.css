@@ -24,23 +24,35 @@ header {
   right: 0;
   color: #ffffff;
   background-color: #ec362d;
+  z-index: 1;
 }
 
 /* HOME SCREEN */
 .firstScreen {
   width: 90%;
+}
+/* MY QUIZZ */
+.firstScreen section div {
   height: 181px;
   border: 1px dashed #d5d5d5;
   border-radius: 5px;
   display: flex;
   justify-content: center;
-  margin-top: 100px;
-}
-
-.myQuizz {
-  display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.myQuizz div {
+  margin: 100px auto 25px auto;
+}
+
+.firstScreen h3 {
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  margin: 20px 0 20px 0;
 }
 
 .myQuizz h3 {
@@ -65,4 +77,29 @@ header {
   border-radius: 50px;
   color: #ec362d;
   background: #fafafa;
+}
+
+/* ALL QUIZZES*/
+.allQuizz div {
+  width: 340px;
+  height: 181px;
+  margin: 0 auto 25px auto;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.allQuizz div img {
+  width: 340px;
+  height: 181px;
+}
+
+.allQuizz div h3 {
+  font-size: 19px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  position: absolute;
+  bottom: -15px;
+  left: 30%;
 }
