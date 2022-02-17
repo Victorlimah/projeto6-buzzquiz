@@ -3,6 +3,7 @@ const firstScreen = document.querySelector(".firstScreen");
 const secondScreen = document.querySelector(".secondScreen");
 
 let arrayQuizzes = null;
+let lengthAnswers = null;
 
 let score = 0; // Número de questões certas
 
@@ -44,8 +45,6 @@ function enterQuizz(id) {
   renderQuestions(quizSelected.questions);
 }
 
-let lengthAnswers = null;
-
 function renderQuestions(questions) {
   const quizQuestions = document.querySelector(".quizQuestions");
   for (let i = 0; i < questions.length; i++) {
@@ -64,7 +63,7 @@ function renderAnswers(answers, answersCod) {
   answers.sort(randomNumber);
   for (let i = 0; i < answers.length; i++) {
     questionAnwers.innerHTML += `
-      <div onclick="selectAnswer(this, ${answers[i].isCorrectAnswer})" class="answerOption">
+      <div onclick="selectAnswer(this, ${answers[i].isCorrectAnswer})" class="answerOption ${answers[i].isCorrectAnswer}">
         <img src="${answers[i].image}">
         <text>${answers[i].text}</text>                            
       </div>`;
@@ -74,27 +73,32 @@ function renderAnswers(answers, answersCod) {
 function selectAnswer(answer, isCorrect) {
   let allImageAnswers = answer.parentNode.querySelectorAll(".answerOption img");
   let allAnswers = answer.parentNode.querySelectorAll(".answerOption");
-  blurOtherChoices(allImageAnswers);
+  blurChoices(allImageAnswers, answer);
   removeOnClick(allAnswers);
-  answer.querySelector("img").classList.add("user-choice");
-
-  if (isCorrect) {
-    score++;
-    answer.classList.add("correct-choice");
-  } else {
-    answer.classList.add("wrong-choice");
-  }
+  changeTextColor(allAnswers, isCorrect);
+  isCorrect ? score++ : score;
 }
 
-function blurOtherChoices(options) {
+function blurChoices(options, answer) {
   for (let i = 0; i < options.length; i++) {
     options[i].classList.add("blur-choice");
   }
+  answer.querySelector("img").classList.add("user-choice");
 }
 
 function removeOnClick(answer) {
   for (let i = 0; i < answer.length; i++) {
     answer[i].removeAttribute("onclick");
+  }
+}
+
+function changeTextColor(answer, isCorrect) {
+  for (let i = 0; i < answer.length; i++) {
+    if (answer[i].classList.contains("true")) {
+      answer[i].classList.add("correct-choice");
+    } else {
+      answer[i].classList.add("wrong-choice");
+    }
   }
 }
 
@@ -105,6 +109,7 @@ function searchQuiz(id) {
     }
   }
 }
+
 function randomNumber() {
   return Math.random() - 0.5;
 }
