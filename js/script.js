@@ -38,6 +38,7 @@ function renderQuizzes(response) {
 function enterQuizz(id) {
   scroolToTop();
   firstScreen.classList.add("hidden");
+  secondScreen.classList.remove("hidden");
   quizSelected = searchQuiz(id);
 
   secondScreen.innerHTML = `
@@ -153,7 +154,6 @@ function renderResult(id) {
 }
 
 function restartQuiz() {
-  //to do
   resetGame();
   scroolToTop();
   secondScreen.innerHTML = "";
@@ -161,13 +161,14 @@ function restartQuiz() {
 }
 
 function backToHome() {
-  //to do
-  resetQuizzes();
   resetGame();
+  resetQuizzes();
+  firstScreen.classList.remove("hidden");
+  secondScreen.classList.add("hidden");
 }
 
 function resetQuizzes() {
-  // Aqui vai ser resetado o innerHTML do AllQuizzes para recarrega-lo
+  getQuizzes();
 }
 
 function resetGame() {
