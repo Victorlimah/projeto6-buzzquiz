@@ -134,23 +134,23 @@ header {
   filter: brightness(60%);
 }
 
-/*TÁ ALINHANDO */
 .bannerQuizz h3 {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 39px;
   line-height: 46px;
-  color: #FFFFFF;
+  color: #ffffff;
   position: absolute;
 }
+
 /* QUIZ QUESTIONS*/
-.quizQuestions{
+.quizQuestions {
   display: flex;
   align-items: center;
   flex-direction: column;
 }
-.quizQuestions section{
+.quizQuestions section {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,7 +159,7 @@ header {
   background: #f7f5f5;
   margin-bottom: 42px;
 }
-.quizQuestions section .questionTitle{
+.quizQuestions section .questionTitle {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -171,26 +171,42 @@ header {
   font-weight: bold;
   margin-bottom: 20px;
 }
-.quizQuestions section div{
+.quizQuestions section div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.quizQuestions .answers .answerOption{
+.quizQuestions .answers .answerOption {
   display: flex;
   flex-direction: column;
   margin-bottom: 19px;
 }
-.quizQuestions .answers .answerOption img{
+.quizQuestions .answers .answerOption img {
   width: 329.91px;
   height: 175.2px;
   margin-bottom: 8px;
 }
-.quizQuestions .answers text{
+.quizQuestions .answers text {
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
+}
+
+/* ANSWERS CHOICES */
+.blur-choice {
+  opacity: 0.3;
+}
+
+.wrong-choice {
+  color: red;
+}
+.correct-choice {
+  color: green;
+}
+
+.user-choice {
+  opacity: 1;
 }
 
 /* CLASSES SUPORT */

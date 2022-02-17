@@ -4,6 +4,8 @@ const secondScreen = document.querySelector(".secondScreen");
 
 let arrayQuizzes = null;
 
+let score = 0; // Número de questões certas
+
 function getQuizzes() {
   elementAllQuizzes.innerHTML = `<h3>Todos os Quizzes</h3>`;
   const promise = axios.get(
@@ -21,7 +23,6 @@ function renderQuizzes(response) {
   let id = null;
   arrayQuizzes.forEach((quiz) => {
     id = quiz.id;
-    // O H3 NÃO TÁ ALINHANDO COM A IMAGEM
     elementAllQuizzes.innerHTML += `
       <div class="bannerQuizz" onclick="enterQuizz(${id})">
       <img src="${quiz.image}" alt="image quiz ${quiz.id}">
@@ -40,28 +41,60 @@ function enterQuizz(id) {
       <h3>${quizSelected.title}</h3>
     </div>
     <div class="quizQuestions"></div>`;
-    renderQuestions(quizSelected.questions);
+  renderQuestions(quizSelected.questions);
 }
-function renderQuestions(questions){
+
+let lengthAnswers = null;
+
+function renderQuestions(questions) {
   const quizQuestions = document.querySelector(".quizQuestions");
-  for(let i=0; i<questions.length; i++){
+  for (let i = 0; i < questions.length; i++) {
+    // ESSE STYLE DENTRO DA DIV, ACHO QUE DÁ PRA METER PRO STYLE.CSS
     quizQuestions.innerHTML += `
       <section>
         <div class="questionTitle" style="background-color:${questions[i].color}; color:white;">${questions[i].title}</div>
-        <div class="answers answers-${i}"></div>
+        <div class="answers answers-${i} ${i}"></div>
       </section>`;
-    renderAnswers(questions[i].answers, i);
+    lengthAnswers = questions[i].answers;
+    renderAnswers(lengthAnswers, i);
   }
 }
-function renderAnswers(answers, answersCod){
+function renderAnswers(answers, answersCod) {
   const questionAnwers = document.querySelector(`.answers-${answersCod}`);
-  answers.sort(randomNumber)
-  for(let i=0; i<answers.length; i++){
+  answers.sort(randomNumber);
+  for (let i = 0; i < answers.length; i++) {
     questionAnwers.innerHTML += `
-      <div class="answerOption">
+      <div onclick="selectAnswer(this, ${answers[i].isCorrectAnswer})" class="answerOption">
         <img src="${answers[i].image}">
         <text>${answers[i].text}</text>                            
-      </div>`
+      </div>`;
+  }
+}
+
+function selectAnswer(answer, isCorrect) {
+  let allImageAnswers = answer.parentNode.querySelectorAll(".answerOption img");
+  let allAnswers = answer.parentNode.querySelectorAll(".answerOption");
+  blurOtherChoices(allImageAnswers);
+  removeOnClick(allAnswers);
+  answer.querySelector("img").classList.add("user-choice");
+
+  if (isCorrect) {
+    score++;
+    answer.classList.add("correct-choice");
+  } else {
+    answer.classList.add("wrong-choice");
+  }
+}
+
+function blurOtherChoices(options) {
+  for (let i = 0; i < options.length; i++) {
+    options[i].classList.add("blur-choice");
+  }
+}
+
+function removeOnClick(answer) {
+  for (let i = 0; i < answer.length; i++) {
+    answer[i].removeAttribute("onclick");
   }
 }
 
@@ -72,7 +105,7 @@ function searchQuiz(id) {
     }
   }
 }
-function randomNumber() { 
-	return Math.random() - 0.5; 
+function randomNumber() {
+  return Math.random() - 0.5;
 }
 getQuizzes();
