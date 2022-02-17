@@ -40,6 +40,7 @@ function enterQuizz(id) {
   scroolToTop();
   hiddenFirstScreen();
   showSecondScreen();
+  hiddenThirdScreen();
   quizSelected = searchQuiz(id);
 
   secondScreen.innerHTML = `
@@ -166,6 +167,7 @@ function backToHome() {
   resetQuizzes();
   showFirstScreen();
   hiddenSecondScreen();
+  hiddenThirdScreen();
 }
 
 function resetQuizzes() {
@@ -188,6 +190,7 @@ function searchQuiz(id) {
 function scroolToTop() {
   window.scrollTo(0, 0);
 }
+
 function scrollToNextQuestion() {
   // to do
 }
@@ -215,7 +218,9 @@ function hiddenSecondScreen() {
 function showSecondScreen() {
   secondScreen.classList.remove("hidden");
 }
-
+function hiddenThirdScreen() {
+  thirdScreen.classList.add("hidden");
+}
 function showThirdScreen() {
   thirdScreen.classList.remove("hidden");
 }
