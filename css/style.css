@@ -199,6 +199,8 @@ header {
   display: flex;
   flex-direction: column;
   margin-bottom: 19px;
+  cursor: pointer;
+  overflow: hidden;
 }
 .quizQuestions .answers .answerOption img {
   width: 329.91px;
@@ -281,6 +283,9 @@ header {
   color: #818181;
 }
 
+.fourthScreen{
+  margin-top: 107px;
+}
 /* CLASSES SUPORT */
 .hidden {
   display: none;
