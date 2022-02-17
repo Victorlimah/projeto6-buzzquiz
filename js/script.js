@@ -36,6 +36,7 @@ function renderQuizzes(response) {
 }
 
 function enterQuizz(id) {
+  window.scrollTo(0, 0); // Deixa a tela lá em cima denovo
   firstScreen.classList.add("hidden");
   quizSelected = searchQuiz(id);
 
@@ -133,18 +134,24 @@ function renderResult(id) {
           <span>${finalScore}% de acerto.&nbsp;</span>
           <span>${titleScore}</span>
         </div>
-
         <div class="image-description">
           <div class="image-result">
             <img src="${imageScore}">
           </div>
-
           <div class="description-result">
             <span>${descriptionScore}</span>
           </div>
         </div>
+      </section>
+      
+      <div class="nav-final-quiz">
+        <div>
+          <button onclick="restartQuiz()">Reiniciar Quizz</button>
+          <span onclick="backToHome()">Voltar pra home</span>
+        </div>
 
-      </section>`;
+
+      </div>`;
 }
 
 function searchQuiz(id) {

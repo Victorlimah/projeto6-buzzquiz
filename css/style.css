@@ -96,6 +96,12 @@ header {
   height: 181px;
   margin: 0 auto 25px auto;
   position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.5) 64.58%,
+    #000000 100%
+  );
 }
 
 .allQuizz div img {
@@ -103,7 +109,7 @@ header {
   height: 181px;
   object-fit: cover;
   border-radius: 5px;
-  filter: brightness(60%);
+  /* filter: brightness(60%);*/
 }
 
 .allQuizz div h3 {
@@ -236,6 +242,34 @@ header {
   line-height: 25px;
   color: #484848;
   padding: 12px;
+}
+
+/*NAV FINAL QUIZ*/
+.nav-final-quiz {
+}
+
+.nav-final-quiz button {
+  width: 220px;
+  height: 44px;
+  background: #ec362d;
+  border: none;
+  border-radius: 15px;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  color: #fff5f4;
+}
+
+.nav-final-quiz span {
+  width: 220px;
+  font-size: 18px;
+  line-height: 21px;
+  margin: 15px 0 50px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #818181;
 }
 
 /* CLASSES SUPORT */
