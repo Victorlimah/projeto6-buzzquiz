@@ -170,6 +170,7 @@ header {
   font-style: normal;
   font-weight: bold;
   margin-bottom: 20px;
+  color: white;
 }
 .quizQuestions section div {
   display: flex;
@@ -207,6 +208,11 @@ header {
 
 .user-choice {
   opacity: 1;
+}
+
+/* RESULT */
+.result-title {
+  background-color: #ec362d;
 }
 
 /* CLASSES SUPORT */

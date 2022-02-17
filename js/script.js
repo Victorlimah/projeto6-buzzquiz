@@ -4,8 +4,11 @@ const secondScreen = document.querySelector(".secondScreen");
 
 let arrayQuizzes = null;
 let lengthAnswers = null;
+let lengthQuestions = null;
+let quizSelected = null;
 
 let score = 0; // Número de questões certas
+let clicks = 0; // Número de cliques em questão
 
 function getQuizzes() {
   elementAllQuizzes.innerHTML = `<h3>Todos os Quizzes</h3>`;
@@ -34,7 +37,7 @@ function renderQuizzes(response) {
 
 function enterQuizz(id) {
   firstScreen.classList.add("hidden");
-  let quizSelected = searchQuiz(id);
+  quizSelected = searchQuiz(id);
 
   secondScreen.innerHTML = `
     <div class="bannerQuizz">
@@ -48,7 +51,6 @@ function enterQuizz(id) {
 function renderQuestions(questions) {
   const quizQuestions = document.querySelector(".quizQuestions");
   for (let i = 0; i < questions.length; i++) {
-    // ESSE STYLE DENTRO DA DIV, ACHO QUE DÁ PRA METER PRO STYLE.CSS
     quizQuestions.innerHTML += `
       <section>
         <div class="questionTitle" style="background-color:${questions[i].color}; color:white;">${questions[i].title}</div>
@@ -58,6 +60,7 @@ function renderQuestions(questions) {
     renderAnswers(lengthAnswers, i);
   }
 }
+
 function renderAnswers(answers, answersCod) {
   const questionAnwers = document.querySelector(`.answers-${answersCod}`);
   answers.sort(randomNumber);
@@ -68,15 +71,23 @@ function renderAnswers(answers, answersCod) {
         <text>${answers[i].text}</text>                            
       </div>`;
   }
+  lengthQuestions = document.querySelectorAll(".questionTitle").length;
 }
 
 function selectAnswer(answer, isCorrect) {
   let allImageAnswers = answer.parentNode.querySelectorAll(".answerOption img");
   let allAnswers = answer.parentNode.querySelectorAll(".answerOption");
+  clicks++;
   blurChoices(allImageAnswers, answer);
   removeOnClick(allAnswers);
   changeTextColor(allAnswers, isCorrect);
   isCorrect ? score++ : score;
+
+  // Scroll não implementado
+  scrollToNextQuestion();
+
+  // Renderizar a tela de resultado
+  clicks === lengthQuestions ? renderResult() : pass();
 }
 
 function blurChoices(options, answer) {
@@ -94,12 +105,39 @@ function removeOnClick(answer) {
 
 function changeTextColor(answer, isCorrect) {
   for (let i = 0; i < answer.length; i++) {
-    if (answer[i].classList.contains("true")) {
-      answer[i].classList.add("correct-choice");
-    } else {
-      answer[i].classList.add("wrong-choice");
+    answer[i].classList.contains("true")
+      ? answer[i].classList.add("correct-choice")
+      : answer[i].classList.add("wrong-choice");
+  }
+}
+
+function renderResult(id) {
+  const quizQuestions = document.querySelector(".quizQuestions");
+  let finalScore = calcFinalScore();
+  let titleScore = " ";
+
+  for (let i = 0; i < quizSelected.levels.length; i++) {
+    let minValue = quizSelected.levels[i].minValue;
+    if (finalScore >= minValue) {
+      titleScore = quizSelected.levels[i].title;
     }
   }
+
+  quizQuestions.innerHTML += `
+      <section>
+        <div class="questionTitle result-title">
+          <span>${finalScore}% de acerto.&nbsp;</span>
+          <span>${titleScore}</span>
+        </div>
+
+        <div class="image-result">
+        
+        </div>
+
+        <div class="description-result>
+          <h3></h3>
+        </div>
+      </section>`;
 }
 
 function searchQuiz(id) {
@@ -110,7 +148,17 @@ function searchQuiz(id) {
   }
 }
 
+function scrollToNextQuestion() {
+  // to do
+}
+
+function calcFinalScore() {
+  return Math.round((score / lengthQuestions) * 100);
+}
+
 function randomNumber() {
   return Math.random() - 0.5;
 }
+
+function pass() {}
 getQuizzes();
