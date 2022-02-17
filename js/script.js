@@ -1,6 +1,7 @@
 const elementAllQuizzes = document.querySelector(".allQuizz");
 const firstScreen = document.querySelector(".firstScreen");
 const secondScreen = document.querySelector(".secondScreen");
+const thirdScreen = document.querySelector(".thirdScreen");
 
 let arrayQuizzes = null;
 let lengthAnswers = null;
@@ -215,6 +216,10 @@ function showSecondScreen() {
   secondScreen.classList.remove("hidden");
 }
 
+function showThirdScreen() {
+  thirdScreen.classList.remove("hidden");
+}
+
 function pass() {}
 
 getQuizzes();
@@ -222,5 +227,5 @@ getQuizzes();
 /* CREATE QUIZZ */
 function createQuizz() {
   hiddenFirstScreen();
-  
+  showThirdScreen();
 }

@@ -53,6 +53,7 @@ header {
 .myQuizz div {
   border: 1px dashed #d5d5d5;
   margin: 100px auto 25px auto;
+  position: relative;
 }
 
 .myQuizz h3 {
@@ -66,6 +67,13 @@ header {
   color: #b9b9b9;
 }
 
+.myQuizz span {
+  font-size: 50px;
+  color: #ec362d;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}
 .myQuizz button {
   font-size: 18px;
   line-height: 25px;
