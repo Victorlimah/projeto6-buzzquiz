@@ -1,0 +1,9 @@
+@media (max-width: 1155px) {
+  .allQuizz {
+    justify-content: space-evenly;
+  }
+
+  .allQuizz h3:first-child {
+    text-align: center;
+  }
+}
