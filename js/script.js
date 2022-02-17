@@ -37,8 +37,8 @@ function renderQuizzes(response) {
 
 function enterQuizz(id) {
   scroolToTop();
-  firstScreen.classList.add("hidden");
-  secondScreen.classList.remove("hidden");
+  hiddenFirstScreen();
+  showSecondScreen();
   quizSelected = searchQuiz(id);
 
   secondScreen.innerHTML = `
@@ -163,8 +163,8 @@ function restartQuiz() {
 function backToHome() {
   resetGame();
   resetQuizzes();
-  firstScreen.classList.remove("hidden");
-  secondScreen.classList.add("hidden");
+  showFirstScreen();
+  hiddenSecondScreen();
 }
 
 function resetQuizzes() {
@@ -199,6 +199,28 @@ function randomNumber() {
   return Math.random() - 0.5;
 }
 
+function hiddenFirstScreen() {
+  firstScreen.classList.add("hidden");
+}
+
+function showFirstScreen() {
+  firstScreen.classList.remove("hidden");
+}
+
+function hiddenSecondScreen() {
+  secondScreen.classList.add("hidden");
+}
+
+function showSecondScreen() {
+  secondScreen.classList.remove("hidden");
+}
+
 function pass() {}
 
 getQuizzes();
+
+/* CREATE QUIZZ */
+function createQuizz() {
+  hiddenFirstScreen();
+  
+}

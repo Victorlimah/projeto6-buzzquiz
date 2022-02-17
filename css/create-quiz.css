@@ -1,0 +1,68 @@
+/* TELA 3.0 */
+.thirdScreen {
+  width: 100vw;
+  margin-top: 80px;
+}
+
+.start-create {
+  width: 100%;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+}
+
+.thirdScreen h3 {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+
+.basic-info-quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  background-color: #fff;
+  margin: 0 auto 0 auto;
+}
+.basic-info-quiz input {
+  width: 100%;
+  max-width: 600px;
+  height: 46px;
+  margin-top: 18px;
+  background: #ffffff;
+  border: none;
+  border: 1px solid #d1d1d1;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.basic-info-quiz input::placeholder {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 19px;
+  line-height: 22px;
+  color: #bababa;
+}
+
+.basic-info-quiz button {
+  border: none;
+  width: 350px;
+  height: 54px;
+  margin-top: 25px;
+  background-color: #ec362d;
+  border-radius: 15px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 21px;
+  line-height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff5f4;
+}
