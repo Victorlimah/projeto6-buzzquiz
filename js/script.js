@@ -36,9 +36,32 @@ function enterQuizz(id) {
 
   secondScreen.innerHTML = `
     <div class="bannerQuizz">
-        <img src="${quizSelected.image}">
-        <h3>${quizSelected.title}</h3>
-      </div>`;
+      <img src="${quizSelected.image}">
+      <h3>${quizSelected.title}</h3>
+    </div>
+    <div class="quizQuestions"></div>`;
+    renderQuestions(quizSelected.questions);
+}
+function renderQuestions(questions){
+  const quizQuestions = document.querySelector(".quizQuestions");
+  for(let i=0; i<questions.length; i++){
+    quizQuestions.innerHTML += `
+      <section>
+        <div class="questionTitle" style="background-color:${questions[i].color}; color:white;">${questions[i].title}</div>
+        <div class="answers"></div>
+      </section>`;
+    renderAnswers(questions[i].answers);
+  }
+}
+function renderAnswers(answers){
+  const questionAnwers = document.querySelector(".answers");
+  for(let i=0; i<answers.length; i++){
+    questionAnwers.innerHTML += `
+      <div class="answerOption">
+        <img src="${answers[i].image}">
+        <text>${answers[i].text}</text>                            
+      </div>`
+  }
 }
 
 function searchQuiz(id) {
