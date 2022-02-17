@@ -211,8 +211,31 @@ header {
 }
 
 /* RESULT */
+.result {
+  display: flex;
+  justify-content: space-between;
+}
 .result-title {
   background-color: #ec362d;
+}
+
+.image-description {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.image-result {
+  width: 50%;
+}
+
+.description-result {
+  width: 50%;
+  font-weight: bold;
+  font-size: 29px;
+  line-height: 25px;
+  color: #484848;
+  padding: 12px;
 }
 
 /* CLASSES SUPORT */

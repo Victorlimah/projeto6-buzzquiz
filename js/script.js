@@ -87,7 +87,7 @@ function selectAnswer(answer, isCorrect) {
   scrollToNextQuestion();
 
   // Renderizar a tela de resultado
-  clicks === lengthQuestions ? renderResult() : pass();
+  clicks === lengthQuestions ? setTimeout(renderResult, 2000) : pass();
 }
 
 function blurChoices(options, answer) {
@@ -114,29 +114,36 @@ function changeTextColor(answer, isCorrect) {
 function renderResult(id) {
   const quizQuestions = document.querySelector(".quizQuestions");
   let finalScore = calcFinalScore();
-  let titleScore = " ";
+  let titleScore = null;
+  let imageScore = null;
+  let descriptionScore = null;
 
   for (let i = 0; i < quizSelected.levels.length; i++) {
     let minValue = quizSelected.levels[i].minValue;
     if (finalScore >= minValue) {
       titleScore = quizSelected.levels[i].title;
+      imageScore = quizSelected.levels[i].image;
+      descriptionScore = quizSelected.levels[i].text;
     }
   }
 
   quizQuestions.innerHTML += `
-      <section>
+      <section class="result">
         <div class="questionTitle result-title">
           <span>${finalScore}% de acerto.&nbsp;</span>
           <span>${titleScore}</span>
         </div>
 
-        <div class="image-result">
-        
+        <div class="image-description">
+          <div class="image-result">
+            <img src="${imageScore}">
+          </div>
+
+          <div class="description-result">
+            <span>${descriptionScore}</span>
+          </div>
         </div>
 
-        <div class="description-result>
-          <h3></h3>
-        </div>
       </section>`;
 }
 
@@ -161,4 +168,5 @@ function randomNumber() {
 }
 
 function pass() {}
+
 getQuizzes();
