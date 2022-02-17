@@ -36,7 +36,7 @@ function renderQuizzes(response) {
 }
 
 function enterQuizz(id) {
-  window.scrollTo(0, 0); // Deixa a tela lá em cima denovo
+  scroolToTop();
   firstScreen.classList.add("hidden");
   quizSelected = searchQuiz(id);
 
@@ -149,9 +149,30 @@ function renderResult(id) {
           <button onclick="restartQuiz()">Reiniciar Quizz</button>
           <span onclick="backToHome()">Voltar pra home</span>
         </div>
-
-
       </div>`;
+}
+
+function restartQuiz() {
+  //to do
+  resetGame();
+  scroolToTop();
+  secondScreen.innerHTML = "";
+  enterQuizz(quizSelected.id);
+}
+
+function backToHome() {
+  //to do
+  resetQuizzes();
+  resetGame();
+}
+
+function resetQuizzes() {
+  // Aqui vai ser resetado o innerHTML do AllQuizzes para recarrega-lo
+}
+
+function resetGame() {
+  score = 0;
+  clicks = 0;
 }
 
 function searchQuiz(id) {
@@ -162,6 +183,9 @@ function searchQuiz(id) {
   }
 }
 
+function scroolToTop() {
+  window.scrollTo(0, 0);
+}
 function scrollToNextQuestion() {
   // to do
 }
