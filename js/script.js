@@ -24,7 +24,7 @@ function renderQuizzes(response) {
     // O H3 NÃO TÁ ALINHANDO COM A IMAGEM
     elementAllQuizzes.innerHTML += `
       <div class="bannerQuizz" onclick="enterQuizz(${id})">
-        <img src="${quiz.image}" alt="image quiz ${quiz.id}">
+      <img src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
   });
@@ -48,13 +48,14 @@ function renderQuestions(questions){
     quizQuestions.innerHTML += `
       <section>
         <div class="questionTitle" style="background-color:${questions[i].color}; color:white;">${questions[i].title}</div>
-        <div class="answers"></div>
+        <div class="answers answers-${i}"></div>
       </section>`;
-    renderAnswers(questions[i].answers);
+    renderAnswers(questions[i].answers, i);
   }
 }
-function renderAnswers(answers){
-  const questionAnwers = document.querySelector(".answers");
+function renderAnswers(answers, answersCod){
+  const questionAnwers = document.querySelector(`.answers-${answersCod}`);
+  answers.sort(randomNumber)
   for(let i=0; i<answers.length; i++){
     questionAnwers.innerHTML += `
       <div class="answerOption">
@@ -71,5 +72,7 @@ function searchQuiz(id) {
     }
   }
 }
-
+function randomNumber() { 
+	return Math.random() - 0.5; 
+}
 getQuizzes();

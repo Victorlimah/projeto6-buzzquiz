@@ -121,7 +121,6 @@ header {
   width: 100vw;
   height: 142px;
   margin: 73px 0 25px 0;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
   position: relative;
   display: flex;
   flex-direction: column;
@@ -132,11 +131,10 @@ header {
 .bannerQuizz img {
   width: 100%;
   object-fit: cover;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57));
   filter: brightness(60%);
 }
 
-/* ESSE TEXTO agora TÁ ALINHANDO */
+/*TÁ ALINHANDO */
 .bannerQuizz h3 {
   font-family: Roboto;
   font-style: normal;
@@ -145,9 +143,8 @@ header {
   line-height: 46px;
   color: #FFFFFF;
   position: absolute;
-  bottom: 50%;
 }
-
+/* QUIZ QUESTIONS*/
 .quizQuestions{
   display: flex;
   align-items: center;
@@ -174,7 +171,7 @@ header {
   font-weight: bold;
   margin-bottom: 20px;
 }
-.quizQuestions .answers{
+.quizQuestions section div{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -184,7 +181,7 @@ header {
   flex-direction: column;
   margin-bottom: 19px;
 }
-.quizQuestions .answers img{
+.quizQuestions .answers .answerOption img{
   width: 329.91px;
   height: 175.2px;
   margin-bottom: 8px;
@@ -197,7 +194,6 @@ header {
 }
 
 /* CLASSES SUPORT */
-
 .hidden {
   display: none;
 }
