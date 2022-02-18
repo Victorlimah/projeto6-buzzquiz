@@ -33,10 +33,11 @@ function checkInformations(title, image, numberQuestions, numberLevels) {
     confirmInformations = false;
   }
   //FALTA A VALIDAÇÃO DA URL DA IMAGEM
+  urlIsValid(image) ? pass() : (confirmInformations = false);
   if (numberQuestions <= 2) {
     confirmInformations = false;
   }
-  if (numberLevels <= 1) {
+  if (numberLevels <= 1) {x
     confirmInformations = false;
   }
   if (confirmInformations === true) {
@@ -68,24 +69,24 @@ function renderCreateQuestions() {
         </span>
 
         <div class="list-question q${i} hidden">
-          <input type="text" placeholder="Texto da pergunta" />
-          <input type="text" placeholder="Cor de fundo da pergunta" />
+          <input class="input-text-question" type="text" placeholder="Texto da pergunta" />
+          <input class="input-color-question" type="text" placeholder="Cor de fundo da pergunta" />
 
           <h3>Resposta correta</h3>
-          <input type="text" placeholder="Resposta correta" />
-          <input type="text" placeholder="URL da imagem" />
+          <input class="input-correct-answer" type="text" placeholder="Resposta correta" />
+          <input class="input-url-correct" type="text" placeholder="URL da imagem" />
 
           <h3>Respostas Incorretas</h3>
-          <input type="text" placeholder="Resposta incorreta 1" />
-          <input type="text" placeholder="URL da imagem 1" />
+          <input class="input-wrong-answer1" type="text" placeholder="Resposta incorreta 1" />
+          <input class="input-url-wrong1" type="text" placeholder="URL da imagem 1" />
 
           <div class="separator-wrong-answer"></div>
-          <input type="text" placeholder="Resposta incorreta 2" />
-          <input type="text" placeholder="URL da imagem 2" />
+          <input class="input-wrong-answer2 " type="text" placeholder="Resposta incorreta 2" />
+          <input class="input-url-wrong3" type="text" placeholder="URL da imagem 2" />
 
           <div class="separator-wrong-answer"></div>
-          <input type="text" placeholder="Resposta incorreta 3" />
-          <input type="text" placeholder="URL da imagem 3" />
+          <input class="input-wrong-answer3" type="text" placeholder="Resposta incorreta 3" />
+          <input class="input-url-wrong3" type="text" placeholder="URL da imagem 3" />
         </div>
       </div>`;
   }
@@ -101,4 +102,61 @@ function renderCreateQuestions() {
 function expandQuestion(id) {
   let element = document.querySelector(".q" + id);
   element.classList.toggle("hidden");
+}
+
+function getQuestionInformations() {
+  let questionTitle = document.querySelector(".input-text-question");
+  let questionColor = document.querySelector(".input-color-question");
+  let correctAnswer = document.querySelector(".input-correct-answer");
+  let correctUrl = document.querySelector(".input-url-correct");
+
+  let wrongAnswer1 = document.querySelector(".input-wrong-answer1");
+  let wrongAnswer2 = document.querySelector(".input-wrong-answer2");
+  let wrongAnswer3 = document.querySelector(".input-wrong-answer3");
+
+  let wrongUrl1 = document.querySelector(".input-url-wrong1");
+  let wrongUrl2 = document.querySelector(".input-url-wrong2");
+  let wrongUrl3 = document.querySelector(".input-url-wrong3");
+
+  infoQuestionsIsValid(
+    questionTitle.value,
+    questionColor.value,
+    correctAnswer.value,
+    correctUrl.value,
+    wrongAnswer1.value,
+    wrongUrl1.value
+  )
+    ? alert("Dados válidos")
+    : alert("Dados inválidos");
+}
+
+function infoQuestionsIsValid(
+  title,
+  color,
+  correctAnswer,
+  correctUrl,
+  wrongAnswer1,
+  wrongUrl1
+) {
+  title.length < 20 ? false : pass();
+  hexadecimalIsValid(color) ? pass() : false;
+  correctAnswer !== "" ? pass() : false;
+  urlIsValid(correctUrl) ? pass() : false;
+  wrongAnswer1 !== "" ? pass() : false;
+  urlIsValid(wrongUrl1) ? pass() : false;
+  return true;
+}
+
+function pass() {}
+
+function hexadecimalIsValid(hexa) {
+  let reg = /^#([0-9a-f]{3}){1,2}$/i;
+  reg.test(hexa);
+}
+
+function urlIsValid(url) {
+  let re = new RegExp(
+    "^((http(s?)://(www.)?[a-z]+.com/)|(magnet:?xt=urn:btih:))"
+  );
+  return re.test(url);
 }
