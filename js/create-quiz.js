@@ -1,21 +1,27 @@
 const thirdScreen2 = document.querySelector(".thirdScreen");
-const fourthScreen = document.querySelector(".fourthScreen");
+const fourthScreen2 = document.querySelector(".fourthScreen");
+const fifthyScreen2 = document.querySelector(".fifthyScreen");
 
+let objQuizz = null;
 let basicInformations = null;
 let countQuestion = 0;
+let countLevels = 0;
+
+// INFOS PRA CRIAR O OBJ QUIZZ
+let titleQuizz = null;
+let imageQuizz = null;
+let questionsQuizz = [];
+let levelsQuizz = [];
 
 function getBasicInformations() {
   const title = document.querySelector(".input-title");
   const imageUrl = document.querySelector(".input-image");
   const numberQuestions = document.querySelector(".number-questions");
-  countQuestion = parseInt(numberQuestions.value);
   const numberLevels = document.querySelector(".number-levels");
-  checkInformations(
-    title.value,
-    imageUrl.value,
-    parseInt(numberQuestions.value),
-    parseInt(numberLevels.value)
-  );
+  countQuestion = parseInt(numberQuestions.value);
+  countLevels = parseInt(numberLevels.value);
+
+  checkInformations(title.value, imageUrl.value, countQuestion, countLevels);
   if (basicInformations !== null) {
     title.value = "";
     imageUrl.value = "";
@@ -23,7 +29,7 @@ function getBasicInformations() {
     numberLevels.value = "";
     renderCreateQuestions();
     thirdScreen2.classList.add("hidden");
-    fourthScreen.classList.remove("hidden");
+    fourthScreen2.classList.remove("hidden");
   }
 }
 
@@ -31,10 +37,13 @@ function checkInformations(title, image, numberQuestions, numberLevels) {
   let confirmInformations = true;
 
   let lengthTitle = title.length < 20 || title.length > 65;
-  lengthTitle ? (confirmInformations = false) : pass();
-  numberQuestions <= 2 ? (checkInformations = false) : pass();
-  numberLevels <= 1 ? (confirmInformations = false) : pass();
-  urlIsValid(image) ? pass() : (confirmInformations = false);
+
+  lengthTitle ?? (confirmInformations = false);
+  numberQuestions <= 2 ?? (confirmInformations = false);
+  numberLevels <= 1 ?? (confirmInformations = false);
+  !urlIsValid(image) ?? (confirmInformations = false);
+
+  // Não sei pra que é usado esse obj basic informations
 
   if (confirmInformations === true) {
     basicInformations = {
@@ -43,21 +52,22 @@ function checkInformations(title, image, numberQuestions, numberLevels) {
       numberQuestions: numberQuestions,
       numberLevels: numberLevels,
     };
-    //Retirar este console.log de teste
-    console.log(basicInformations);
+
+    titleQuizz = title;
+    imageQuizz = image;
   } else {
     alert("Preencha os campos corretamente!");
   }
 }
 
 function renderCreateQuestions() {
-  fourthScreen.innerHTML = ` 
+  fourthScreen2.innerHTML = ` 
     <div class="start-create">
         <h3>Crie suas perguntas</h3>
       </div>`;
 
   for (let i = 0; i < countQuestion; i++) {
-    fourthScreen.innerHTML += `
+    fourthScreen2.innerHTML += `
       <div class="basic-info-quiz questions">
         <span class="question-title">
           <h3>Pergunta ${i + 1}</h3>
@@ -78,7 +88,7 @@ function renderCreateQuestions() {
 
           <div class="separator-wrong-answer"></div>
           <input class="input-wrong-answer2 " type="text" placeholder="Resposta incorreta 2" />
-          <input class="input-url-wrong3" type="text" placeholder="URL da imagem 2" />
+          <input class="input-url-wrong2" type="text" placeholder="URL da imagem 2" />
 
           <div class="separator-wrong-answer"></div>
           <input class="input-wrong-answer3" type="text" placeholder="Resposta incorreta 3" />
@@ -87,17 +97,12 @@ function renderCreateQuestions() {
       </div>`;
   }
 
-  fourthScreen.innerHTML += `
+  fourthScreen2.innerHTML += `
       <div class="basic-info-quiz">
         <button onclick="getQuestionInformations()">
           Prosseguir pra criar níveis
         </button>
       </div>`;
-}
-
-function expandQuestion(id) {
-  let element = document.querySelector(".q" + id);
-  element.classList.toggle("hidden");
 }
 
 function getQuestionInformations() {
@@ -120,9 +125,13 @@ function getQuestionInformations() {
     correctAnswer.value,
     correctUrl.value,
     wrongAnswer1.value,
-    wrongUrl1.value
+    wrongUrl1.value,
+    wrongAnswer2.value,
+    wrongUrl2.value,
+    wrongAnswer3.value,
+    wrongUrl3.value
   )
-    ? alert("Dados válidos")
+    ? renderLevelsInformations() //criar obj questions
     : alert("Dados inválidos");
 }
 
@@ -132,19 +141,60 @@ function infoQuestionsIsValid(
   correctAnswer,
   correctUrl,
   wrongAnswer1,
-  wrongUrl1
+  wrongUrl1,
+  wrongAnswer2,
+  wrongUrl2,
+  wrongAnswer3,
+  wrongUrl3
 ) {
+  // Posso usar o operador com:
+  // condicao ?? acaoTrue();
+
   title.length < 20 ? false : pass();
   hexadecimalIsValid(color) ? pass() : false;
   correctAnswer !== "" ? pass() : false;
   urlIsValid(correctUrl) ? pass() : false;
   wrongAnswer1 !== "" ? pass() : false;
   urlIsValid(wrongUrl1) ? pass() : false;
+
+  // PERGUNTAS 2 E 3 PODEM SER VAZIAS
+  // Mas se não forem, temos que testar
+
+  if (!inputEmpty(wrongAnswer2)) {
+    urlIsValid(wrongUrl2) ? pass() : false;
+  }
+  if (!inputEmpty(wrongAnswer3)) {
+    urlIsValid(wrongUrl3) ? pass() : false;
+  }
+
   return true;
 }
 
-function pass() {}
+function renderLevelsInformations() {
+  fourthScreen2.classList.add("hidden");
+  fifthyScreen2.classList.remove("hidden");
 
+  for (let i = 0; i < countLevels; i++) {
+    fifthyScreen2.innerHTML += `
+    <div class="basic-info-quiz questions">
+        <span class="question-title">
+          <h3>Nível ${i + 1}</h3>
+          <img src="./images/icon-create.svg" onclick="expandLevel(${i})">
+        </span>
+
+        <div class="list-question l${i} hidden">
+          <input class="input-title-level" type="text" placeholder="Título do nível" />
+          <input class="input-percentage-level" type="text" placeholder="% de acerto mínima" />
+          <input class="input-url-level" type="text" placeholder="URL da imagem do nível" />
+          <input class="input-description-level" type="text" placeholder="Descrição do nível" />
+        </div>
+    </div>`;
+  }
+}
+
+function inputEmpty(input) {
+  return input === "";
+}
 function hexadecimalIsValid(hexa) {
   let reg = /^#([0-9a-f]{3}){1,2}$/i;
   reg.test(hexa);
@@ -156,3 +206,15 @@ function urlIsValid(url) {
   );
   return re.test(url);
 }
+
+function expandQuestion(id) {
+  let element = document.querySelector(".q" + id);
+  element.classList.toggle("hidden");
+}
+
+function expandLevel(id) {
+  let element = document.querySelector(".l" + id);
+  element.classList.toggle("hidden");
+}
+
+function pass() {}

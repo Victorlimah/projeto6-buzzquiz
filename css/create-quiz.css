@@ -1,6 +1,7 @@
 /* TELA 3.0 */
 .thirdScreen,
-.fourthScreen {
+.fourthScreen,
+.fifthyScreen {
   width: 100vw;
   margin-top: 80px;
 }
@@ -31,7 +32,12 @@
   margin: 0 auto 0 auto;
 }
 
-.basic-info-quiz input {
+.list-question {
+  width: 100%;
+}
+
+.basic-info-quiz input,
+.list-question input {
   width: 100%;
   max-width: 600px;
   height: 46px;
@@ -82,10 +88,6 @@
   font-size: 20px;
   line-height: 23px;
   margin: 15px 0 8px 0;
-}
-
-.questions {
-  align-items: flex-start;
 }
 
 .separator-wrong-answer {

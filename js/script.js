@@ -2,6 +2,8 @@ const elementAllQuizzes = document.querySelector(".allQuizz");
 const firstScreen = document.querySelector(".firstScreen");
 const secondScreen = document.querySelector(".secondScreen");
 const thirdScreen = document.querySelector(".thirdScreen");
+const fourthScreen = document.querySelector(".fourthScreen");
+const fifthyScreen = document.querySelector(".fifthyScreen");
 
 let arrayQuizzes = null;
 let lengthAnswers = null;
@@ -169,6 +171,8 @@ function backToHome() {
   showFirstScreen();
   hiddenSecondScreen();
   hiddenThirdScreen();
+  fourthScreen.classList.add("hidden");
+  fifthyScreen.classList.add("hidden");
 }
 
 function resetQuizzes() {
