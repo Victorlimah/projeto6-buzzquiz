@@ -147,18 +147,16 @@ function infoQuestionsIsValid(
   wrongAnswer3,
   wrongUrl3
 ) {
-  // Posso usar o operador com:
-  // condicao ?? acaoTrue();
-
-  title.length < 20 ? false : pass();
-  hexadecimalIsValid(color) ? pass() : false;
-  correctAnswer !== "" ? pass() : false;
-  urlIsValid(correctUrl) ? pass() : false;
-  wrongAnswer1 !== "" ? pass() : false;
-  urlIsValid(wrongUrl1) ? pass() : false;
+  title.length < 20 ?? false;
+  !hexadecimalIsValid(color) ?? pass();
+  correctAnswer === "" ?? false;
+  !urlIsValid(correctUrl) ?? false;
+  wrongAnswer1 === "" ?? false;
+  !urlIsValid(wrongUrl1) ?? false;
 
   // PERGUNTAS 2 E 3 PODEM SER VAZIAS
   // Mas se não forem, temos que testar
+  //
 
   if (!inputEmpty(wrongAnswer2)) {
     urlIsValid(wrongUrl2) ? pass() : false;
@@ -190,6 +188,12 @@ function renderLevelsInformations() {
         </div>
     </div>`;
   }
+  fifthyScreen2.innerHTML += `
+      <div class="basic-info-quiz">
+        <button onclick="finishQuiz()">
+          Finalizar Quizz
+        </button>
+      </div>`;
 }
 
 function inputEmpty(input) {
@@ -197,7 +201,7 @@ function inputEmpty(input) {
 }
 function hexadecimalIsValid(hexa) {
   let reg = /^#([0-9a-f]{3}){1,2}$/i;
-  reg.test(hexa);
+  return reg.test(hexa);
 }
 
 function urlIsValid(url) {
@@ -218,3 +222,48 @@ function expandLevel(id) {
 }
 
 function pass() {}
+
+function finishQuiz() {
+  levelQuizIsValid() ? alert("QUIZ FINALIZADO") : alert("QUIZ INVÁLIDO");
+
+  // CRIAÇÃO DO OBJ QUIZZ
+  // let obj = [
+  //   {
+  //     title: titleQuizz,
+  //     image: imageQuizz,
+  //     questions: [],
+  //     levels: [],
+  //   },
+  // ];
+}
+
+function levelQuizIsValid() {
+  let element = null;
+  for (let i = 0; i < countLevels; i++) {
+    element = document.querySelector(".l" + i);
+    let levelTitle = element.querySelector(".input-title-level").value;
+    let levelPercentage = parseInt(
+      element.querySelector(".input-percentage-level").value
+    );
+    let levelURL = element.querySelector(".input-url-level").value;
+    let levelDesc = element.querySelector(".input-description-level").value;
+    console.log(
+      `TITLE ${levelTitle} PERCENT ${levelPercentage} URL ${levelURL} DESC${levelDesc}`
+    );
+
+    if (levelTitle.length < 10) {
+      return false;
+    }
+    if (levelPercentage > 100 || levelPercentage < 0) {
+      return false;
+    }
+    if (!urlIsValid(levelURL)) {
+      return false;
+    }
+
+    if (levelDesc.length < 30) {
+      return false;
+    }
+  }
+  return true;
+}
