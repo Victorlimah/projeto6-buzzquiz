@@ -1,5 +1,6 @@
 /* TELA 3.0 */
-.thirdScreen {
+.thirdScreen,
+.fourthScreen {
   width: 100vw;
   margin-top: 80px;
 }
@@ -11,7 +12,7 @@
   justify-content: center;
 }
 
-.thirdScreen h3 {
+.start-create h3 {
   font-style: normal;
   font-weight: bold;
   font-size: 20px;
@@ -29,11 +30,12 @@
   background-color: #fff;
   margin: 0 auto 0 auto;
 }
+
 .basic-info-quiz input {
   width: 100%;
   max-width: 600px;
   height: 46px;
-  margin-top: 18px;
+  margin-top: 12px;
   background: #ffffff;
   border: none;
   border: 1px solid #d1d1d1;
@@ -65,4 +67,28 @@
   align-items: center;
   text-align: center;
   color: #fff5f4;
+}
+
+/* CREATE QUESTIONS */
+.question-title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.basic-info-quiz h3 {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  margin: 15px 0 8px 0;
+}
+
+.questions {
+  align-items: flex-start;
+}
+
+.separator-wrong-answer {
+  width: 100%;
+  margin-top: 15px;
 }

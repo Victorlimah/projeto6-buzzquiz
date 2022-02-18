@@ -2,7 +2,6 @@ const elementAllQuizzes = document.querySelector(".allQuizz");
 const firstScreen = document.querySelector(".firstScreen");
 const secondScreen = document.querySelector(".secondScreen");
 const thirdScreen = document.querySelector(".thirdScreen");
-const fourthScreen = document.querySelector(".fourthScreen");
 
 let arrayQuizzes = null;
 let lengthAnswers = null;
@@ -138,6 +137,7 @@ function renderResult(id) {
           <span>${finalScore}% de acerto.&nbsp;</span>
           <span>${titleScore}</span>
         </div>
+
         <div class="image-description">
           <div class="image-result">
             <img src="${imageScore}">
@@ -147,7 +147,7 @@ function renderResult(id) {
           </div>
         </div>
       </section>
-      
+
       <div class="nav-final-quiz">
         <div>
           <button onclick="restartQuiz()">Reiniciar Quizz</button>
@@ -204,6 +204,7 @@ function randomNumber() {
   return Math.random() - 0.5;
 }
 
+// REFATORAR DEPOIS E SUBSTITUIR ESSE METODOS HIDDEN/SHOW
 function hiddenFirstScreen() {
   firstScreen.classList.add("hidden");
 }
@@ -232,7 +233,6 @@ function showFourthScreen() {
   fourthScreen.classList.remove("hidden");
 }
 
-
 function pass() {}
 
 getQuizzes();
@@ -244,46 +244,4 @@ function createQuizz() {
 }
 
 //INFORMAÇÕES DA TELA 3.1
-let basicInformations = null
-
-function getBasicInformations(){
-  const title = document.querySelector(".input-title")
-  const imageUrl = document.querySelector(".input-image")
-  const numberQuestions = document.querySelector(".number-questions")
-  const numberLevels = document.querySelector(".number-levels")
-  checkInformations(title.value, imageUrl.value, parseInt(numberQuestions.value), parseInt(numberLevels.value))
-  if(basicInformations !== null){
-    title.value = ""
-    imageUrl.value = ""
-    numberQuestions.value = ""
-    numberLevels.value = ""
-    hiddenThirdScreen()
-    showFourthScreen()
-  }
-}
-
-function checkInformations(title, image, numberQuestions, numberLevels){
-  let confirmInformations = true
-  if(title.length<20 || title.length>65){
-    confirmInformations = false
-  }
-  //FALTA A VALIDAÇÃO DA URL DA IMAGEM
-  if(numberQuestions < 3 ){
-    confirmInformations = false
-  }
-  if(numberLevels < 2 ){
-    confirmInformations = false
-  }
-  if(confirmInformations === true){
-    basicInformations = {
-      title: title,
-      image: image,
-      numberQuestions: numberQuestions,
-      numberLevels: numberLevels
-    }
-    //Retirar este console.log de teste
-    console.log(basicInformations)
-  }else{
-    alert("Preencha os campos corretamente!")
-  }
-}
+// MOVIDOS PARA OUTRO ARQUIVO JS
