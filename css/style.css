@@ -127,12 +127,10 @@ header {
 .allQuizz div h3 {
   font-size: 19px;
   line-height: 22px;
+  margin-top: 125px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   color: #ffffff;
-  position: absolute;
-  bottom: 5px;
-  left: 30%;
 }
 /* QUIZZ SELECTED */
 .bannerQuizz {
@@ -283,7 +281,7 @@ header {
   color: #818181;
 }
 
-.fourthScreen{
+.fourthScreen {
   margin-top: 107px;
 }
 /* CLASSES SUPORT */
