@@ -29,17 +29,13 @@ function getBasicInformations() {
 
 function checkInformations(title, image, numberQuestions, numberLevels) {
   let confirmInformations = true;
-  if (title.length < 20 || title.length > 65) {
-    confirmInformations = false;
-  }
-  //FALTA A VALIDAÇÃO DA URL DA IMAGEM
+
+  let lengthTitle = title.length < 20 || title.length > 65;
+  lengthTitle ? (confirmInformations = false) : pass();
+  numberQuestions <= 2 ? (checkInformations = false) : pass();
+  numberLevels <= 1 ? (confirmInformations = false) : pass();
   urlIsValid(image) ? pass() : (confirmInformations = false);
-  if (numberQuestions <= 2) {
-    confirmInformations = false;
-  }
-  if (numberLevels <= 1) {x
-    confirmInformations = false;
-  }
+
   if (confirmInformations === true) {
     basicInformations = {
       title: title,
