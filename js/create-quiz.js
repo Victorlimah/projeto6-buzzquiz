@@ -43,7 +43,7 @@ function checkInformations(title, image, numberQuestions, numberLevels) {
   lengthTitle ? (confirmInformations = false) : pass();
   numberQuestions <= 2 ? (confirmInformations = false) : pass();
   numberLevels <= 1 ? (confirmInformations = false) : pass();
-  !urlIsValid(image) ? (confirmInformations = false) : pass();
+  //!urlIsValid(image) ? (confirmInformations = false) : pass();
 
 
   // Não sei pra que é usado esse obj basic informations
@@ -167,7 +167,8 @@ function infoQuestionsIsValid(
   if (correctAnswer === "") {
     return false;
   }
-  if (!urlIsValid(correctUrl)) {
+  //VALIDAÇÃO DE URL RETIRADA APENAS PARA TESTES
+  /*if (!urlIsValid(correctUrl)) {
     return false;
   }
   if (wrongAnswer1 === "") {
@@ -190,7 +191,7 @@ function infoQuestionsIsValid(
     if (!urlIsValid(wrongUrl3)) {
       return false;
     }
-  }
+  }*/
 
   const answers = [
     {
@@ -291,6 +292,7 @@ function finishQuiz() {
       levels: levelsQuizz
     }
     console.log(objQuizz)
+    const promisse = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objQuizz)
     renderFinishedQuizz()
 
   }else{
@@ -318,9 +320,9 @@ function levelQuizIsValid() {
     if (levelPercentage > 100 || levelPercentage < 0) {
       return false;
     }
-    if (!urlIsValid(levelURL)) {
+    /*if (!urlIsValid(levelURL)) {
       return false;
-    }
+    }*/
 
     if (levelDesc.length < 30) {
       return false;
@@ -343,14 +345,14 @@ function levelQuizIsValid() {
 }
 
 function renderFinishedQuizz(){
-  fifthyScreen2.classList.add("add")
+  fifthyScreen2.classList.add("hidden")
   sixthScreen2.classList.remove("hidden")
   sixthScreen2.innerHTML += ` 
     <div class="start-create">
         <h3>Crie suas perguntas</h3>
     </div>
     <section>
-      <img src="${imageQuizz}"/>
+      <img src="${imageQuizz}">
       <text>${titleQuizz}</text>
       <button>Acessar Quizz</button>
       <text>Voltar para a home</text>
