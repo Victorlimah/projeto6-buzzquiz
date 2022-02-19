@@ -43,3 +43,16 @@
     line-height: 21px;
   }
 }
+
+@media (max-width: 375px) {
+  .sixthScreen section img{
+    width: 340px;
+    height: 181px;
+  }
+  .sixthScreen section button{
+    width: 220px;
+  }
+  .sixthScreen section text{
+    font-size: 18px;
+  }
+}

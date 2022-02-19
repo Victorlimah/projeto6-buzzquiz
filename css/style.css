@@ -285,11 +285,18 @@ header {
   margin-top: 107px;
 }
 
+.sixthScreen .start-create{
+  margin-top: 73px;
+}
 .sixthScreen section{
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.sixthScreen div {
+  position: relative;
+  cursor: pointer;
 }
 .sixthScreen div img {
   width: 500px;
@@ -315,6 +322,7 @@ header {
   align-items: center;
   text-align: center;
   color: #fff5f4;
+  cursor: pointer;
 }
 .sixthScreen text{
   width: 219.64px;
@@ -327,10 +335,18 @@ header {
   display: flex;
   align-items: center;
   text-align: center;
-
   color: #818181;
+  cursor: pointer;
 }
-
+.sixthScreen .t1{
+  color: #FFFFFF;
+  position: absolute;
+  left: 23px;
+  bottom: 13px;
+}
+.sixthScreen .t2{
+  margin-left: 65px;
+}
 /* CLASSES SUPORT */
 .hidden {
   display: none;

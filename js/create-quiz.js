@@ -1,3 +1,4 @@
+const secondScreen2 = document.querySelector(".secondScreen");
 const thirdScreen2 = document.querySelector(".thirdScreen");
 const fourthScreen2 = document.querySelector(".fourthScreen");
 const fifthyScreen2 = document.querySelector(".fifthyScreen");
@@ -195,31 +196,31 @@ function infoQuestionsIsValid(
 
   const answers = [
     {
-      text: correctAnswer,
-      image: correctUrl,
-      isCorrectAnswer: true
+      "text": correctAnswer,
+      "image": correctUrl,
+      "isCorrectAnswer": true
     },
     {
-      text: wrongAnswer1,
-      image: wrongUrl1,
-      isCorrectAnswer: false
+      "text": wrongAnswer1,
+      "image": wrongUrl1,
+      "isCorrectAnswer": false
     },
     {
-      text: wrongAnswer2,
-      image: wrongUrl2,
-      isCorrectAnswer: false
+      "text": wrongAnswer2,
+      "image": wrongUrl2,
+      "isCorrectAnswer": false
     },
     {
-      text: wrongAnswer3,
-      image: wrongUrl3,
-      isCorrectAnswer: false
+      "text": wrongAnswer3,
+      "image": wrongUrl3,
+      "isCorrectAnswer": false
     }
   ]
 
   const question = {
-    title: title,
-    color: color,
-    answers: answers
+    "title": title,
+    "color": color,
+    "answers": answers
   }
   questionsQuizz.push(question)
 
@@ -263,12 +264,12 @@ function hexadecimalIsValid(hexa) {
   return reg.test(hexa);
 }
 
-function urlIsValid(url) {
+/*function urlIsValid(url) {
   let re = new RegExp(
     "^((http(s?)://(www.)?[a-z]+.com)|(magnet:?xt=urn:btih:))"
   );
   return re.test(url);
-}
+}*/
 
 function expandQuestion(id) {
   let element = document.querySelector(".q" + id);
@@ -286,19 +287,26 @@ function finishQuiz() {
   levelQuizIsValid()
   if(levelsQuizz.length === countLevels){
     objQuizz = {
-      title: titleQuizz,
-      image: imageQuizz,
-      questions: questionsQuizz,
-      levels: levelsQuizz
+      "title": titleQuizz,
+      "image": imageQuizz,
+      "questions": questionsQuizz,
+      "levels": levelsQuizz
     }
     console.log(objQuizz)
     const promisse = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objQuizz)
+    promisse.then(response => passQuizzId(response.data.id))
     renderFinishedQuizz()
 
   }else{
     alert("Preencha os campos corretamente.")
     levelsQuizz = []
   }
+}
+let selectedQuizzId = undefined
+
+function passQuizzId(id){
+  selectedQuizzId = id
+  console.log(selectedQuizzId)
 }
 
 function levelQuizIsValid() {
@@ -329,10 +337,10 @@ function levelQuizIsValid() {
     }
 
     const level = {
-      title:levelTitle,
-      image: levelURL,
-      text: levelDesc,
-      minValue: levelPercentage
+      "title":levelTitle,
+      "image": levelURL,
+      "text": levelDesc,
+      "minValue": levelPercentage
     }
     levelsQuizz.push(level)
   }
@@ -349,13 +357,15 @@ function renderFinishedQuizz(){
   sixthScreen2.classList.remove("hidden")
   sixthScreen2.innerHTML += ` 
     <div class="start-create">
-        <h3>Crie suas perguntas</h3>
+      <h3>Crie suas perguntas</h3>
     </div>
     <section>
-      <img src="${imageQuizz}">
-      <text>${titleQuizz}</text>
-      <button>Acessar Quizz</button>
-      <text>Voltar para a home</text>
-    </section>
-    `;
+      <div>
+        <img src="${imageQuizz}">
+        <text class="t1">${titleQuizz}</text>
+      </div>                              
+      <button onclick="enterQuizzBySixthScreen(${selectedQuizzId})">Acessar Quizz</button>
+      <text onclick="goToHome()" class="t2">Voltar para a home</text>
+    </section>`;
 }
+

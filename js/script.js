@@ -4,6 +4,7 @@ const secondScreen = document.querySelector(".secondScreen");
 const thirdScreen = document.querySelector(".thirdScreen");
 const fourthScreen = document.querySelector(".fourthScreen");
 const fifthyScreen = document.querySelector(".fifthyScreen");
+const sixthScreen = document.querySelector(".sixthScreen");
 
 let arrayQuizzes = null;
 let lengthAnswers = null;
@@ -20,7 +21,6 @@ function getQuizzes() {
   const promise = axios.get(
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
   );
-
   promise.then(renderQuizzes);
   promise.catch(() => {
     alert("Fail render quizzes!");
@@ -40,6 +40,12 @@ function renderQuizzes(response) {
   });
 }
 
+function goToHome(){
+  sixthScreen.classList.add("hidden");
+  firstScreen.classList.remove("hidden");
+  getQuizzes()
+}
+
 function enterQuizz(id) {
   scroolToTop();
   hiddenFirstScreen();
@@ -54,6 +60,19 @@ function enterQuizz(id) {
     </div>
     <div class="quizQuestions"></div>`;
   renderQuestions(quizSelected.questions);
+}
+
+function enterQuizzBySixthScreen(id){
+  hiddenSixthScreen()
+  showSecondScreen()
+  quizSelected = searchQuiz(id);
+  secondScreen.innerHTML = `
+    <div class="bannerQuizz">
+      <img src="${quizSelected.image}">
+      <h3>${quizSelected.title}</h3>
+    </div>
+    <div class="quizQuestions"></div>`;
+    renderQuestions(quizSelected.questions);
 }
 
 function renderQuestions(questions) {
@@ -240,6 +259,9 @@ function hiddenFourthScreen() {
 }
 function showFourthScreen() {
   fourthScreen.classList.remove("hidden");
+}
+function hiddenSixthScreen() {
+  sixthScreen.classList.add("hidden");
 }
 
 function pass() {}
