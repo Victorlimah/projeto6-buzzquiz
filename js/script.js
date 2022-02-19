@@ -12,6 +12,8 @@ let quizSelected = null;
 
 let score = 0; // Número de questões certas
 let clicks = 0; // Número de cliques em questão
+let quest = 0; // Número da questão que tá sendo respondida
+let heigthScrool = 0; // Tamanho da section para fazer scrool
 
 function getQuizzes() {
   elementAllQuizzes.innerHTML = `<h3>Todos os Quizzes</h3>`;
@@ -58,7 +60,7 @@ function renderQuestions(questions) {
   const quizQuestions = document.querySelector(".quizQuestions");
   for (let i = 0; i < questions.length; i++) {
     quizQuestions.innerHTML += `
-      <section>
+      <section id="question${i}">
         <div class="questionTitle" style="background-color:${questions[i].color}; color:white;">${questions[i].title}</div>
         <div class="answers answers-${i} ${i}"></div>
       </section>`;
@@ -84,16 +86,23 @@ function selectAnswer(answer, isCorrect) {
   let allImageAnswers = answer.parentNode.querySelectorAll(".answerOption img");
   let allAnswers = answer.parentNode.querySelectorAll(".answerOption");
   clicks++;
+
   blurChoices(allImageAnswers, answer);
   removeOnClick(allAnswers);
   changeTextColor(allAnswers, isCorrect);
   isCorrect ? score++ : score;
-
-  // Scroll não implementado
-  scrollToNextQuestion();
+  quest++;
+  setTimeout(scrollToNextQuestion, 2200);
 
   // Renderizar a tela de resultado
   clicks === lengthQuestions ? setTimeout(renderResult, 2000) : pass();
+}
+
+function scrollToNextQuestion() {
+  let questions = document.querySelector("#question" + quest);
+  let position = questions.getBoundingClientRect().height;
+  heigthScrool += position;
+  window.scrollTo(0, heigthScrool);
 }
 
 function blurChoices(options, answer) {
@@ -134,7 +143,7 @@ function renderResult(id) {
   }
 
   quizQuestions.innerHTML += `
-      <section class="result">
+      <section id="question${quizSelected.questions.length}" class="result">
         <div class="questionTitle result-title">
           <span>${finalScore}% de acerto.&nbsp;</span>
           <span>${titleScore}</span>
@@ -194,10 +203,6 @@ function searchQuiz(id) {
 
 function scroolToTop() {
   window.scrollTo(0, 0);
-}
-
-function scrollToNextQuestion() {
-  // to do
 }
 
 function calcFinalScore() {

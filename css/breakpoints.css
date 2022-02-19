@@ -7,3 +7,39 @@
     text-align: center;
   }
 }
+
+@media (max-width: 1100px) {
+  .bannerQuizz h3 {
+    font-size: 19px;
+    line-height: 22px;
+  }
+
+  /* FALTA CRIAR A RESPONSIVIDADE DA TELA 2 PQ OS TAMANHOS ESTÃO FIXOS */
+  
+  .quizQuestions section .questionTitle {
+    font-size: 19px;
+    line-height: 22px;
+  }
+  .quizQuestions .answers text {
+    font-size: 13px;
+    line-height: 15px;
+  }
+
+  .start-create h3 {
+    font-size: 20px;
+    line-height: 23px;
+  }
+  .basic-info-quiz button {
+    width: 325px;
+    font-size: 18px;
+    line-height: 21px;
+  }
+}
+
+@media (max-width: 650px) {
+  .basic-info-quiz button {
+    width: 75%;
+    font-size: 18px;
+    line-height: 21px;
+  }
+}
