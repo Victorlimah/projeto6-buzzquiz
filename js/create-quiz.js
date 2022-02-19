@@ -2,7 +2,7 @@ const secondScreen2 = document.querySelector(".secondScreen");
 const thirdScreen2 = document.querySelector(".thirdScreen");
 const fourthScreen2 = document.querySelector(".fourthScreen");
 const fifthyScreen2 = document.querySelector(".fifthyScreen");
-const sixthScreen2 = document.querySelector(".sixthScreen")
+const sixthScreen2 = document.querySelector(".sixthScreen");
 
 let objQuizz = null;
 let basicInformations = null;
@@ -37,7 +37,6 @@ function getBasicInformations() {
 }
 
 function checkInformations(title, image, numberQuestions, numberLevels) {
-
   let confirmInformations = true;
   let lengthTitle = title.length < 20 || title.length > 65;
 
@@ -45,7 +44,6 @@ function checkInformations(title, image, numberQuestions, numberLevels) {
   numberQuestions <= 2 ? (confirmInformations = false) : pass();
   numberLevels <= 1 ? (confirmInformations = false) : pass();
   //!urlIsValid(image) ? (confirmInformations = false) : pass();
-
 
   // Não sei pra que é usado esse obj basic informations
 
@@ -110,20 +108,20 @@ function renderCreateQuestions() {
 }
 
 function getQuestionInformations() {
-  for(let i=0; i<countQuestion; i++){
+  for (let i = 0; i < countQuestion; i++) {
     let questionTitle = document.querySelector(`.q${i} .input-text-question`);
     let questionColor = document.querySelector(`.q${i} .input-color-question`);
     let correctAnswer = document.querySelector(`.q${i} .input-correct-answer`);
     let correctUrl = document.querySelector(`.q${i} .input-url-correct`);
-  
+
     let wrongAnswer1 = document.querySelector(`.q${i} .input-wrong-answer1`);
     let wrongAnswer2 = document.querySelector(`.q${i} .input-wrong-answer2`);
     let wrongAnswer3 = document.querySelector(`.q${i} .input-wrong-answer3`);
-  
+
     let wrongUrl1 = document.querySelector(`.q${i} .input-url-wrong1`);
     let wrongUrl2 = document.querySelector(`.q${i} .input-url-wrong2`);
     let wrongUrl3 = document.querySelector(`.q${i} .input-url-wrong3`);
-  
+
     infoQuestionsIsValid(
       questionTitle.value,
       questionColor.value,
@@ -135,13 +133,13 @@ function getQuestionInformations() {
       wrongUrl2.value,
       wrongAnswer3.value,
       wrongUrl3.value
-    )
+    );
   }
 
-  if(questionsQuizz.length === countQuestion){
-    console.log(questionsQuizz)
+  if (questionsQuizz.length === countQuestion) {
+    console.log(questionsQuizz);
     renderLevelsInformations();
-  }else{
+  } else {
     alert("Dados inválidos");
     questionsQuizz = [];
   }
@@ -168,8 +166,8 @@ function infoQuestionsIsValid(
   if (correctAnswer === "") {
     return false;
   }
-  //VALIDAÇÃO DE URL RETIRADA APENAS PARA TESTES
-  /*if (!urlIsValid(correctUrl)) {
+
+  if (!urlIsValid(correctUrl)) {
     return false;
   }
   if (wrongAnswer1 === "") {
@@ -181,48 +179,61 @@ function infoQuestionsIsValid(
 
   // PERGUNTAS 2 E 3 PODEM SER VAZIAS
   // Mas se não forem, temos que testar
-  //
 
-  if (!inputEmpty(wrongAnswer2)) {
+  let answer3Exist = !inputEmpty(wrongAnswer2);
+  let answer4Exist = !inputEmpty(wrongAnswer3);
+
+  if (answer3Exist) {
     if (!urlIsValid(wrongUrl2)) {
       return false;
     }
   }
-  if (!inputEmpty(wrongAnswer3)) {
+  if (answer4Exist) {
     if (!urlIsValid(wrongUrl3)) {
       return false;
     }
-  }*/
+  }
 
-  const answers = [
-    {
-      "text": correctAnswer,
-      "image": correctUrl,
-      "isCorrectAnswer": true
-    },
-    {
-      "text": wrongAnswer1,
-      "image": wrongUrl1,
-      "isCorrectAnswer": false
-    },
-    {
-      "text": wrongAnswer2,
-      "image": wrongUrl2,
-      "isCorrectAnswer": false
-    },
-    {
-      "text": wrongAnswer3,
-      "image": wrongUrl3,
-      "isCorrectAnswer": false
-    }
-  ]
+  let answer1 = {
+    text: correctAnswer,
+    image: correctUrl,
+    isCorrectAnswer: true,
+  };
+
+  let answer2 = {
+    text: wrongAnswer1,
+    image: wrongUrl1,
+    isCorrectAnswer: false,
+  };
+
+  let answer3 = {
+    text: wrongAnswer2,
+    image: wrongUrl2,
+    isCorrectAnswer: false,
+  };
+
+  let answer4 = {
+    text: wrongAnswer3,
+    image: wrongUrl3,
+    isCorrectAnswer: false,
+  };
+
+  let answers = [answer1, answer2];
+
+  if (answer3Exist) {
+    answers.push(answer3);
+  }
+
+  if (answer4Exist) {
+    answers.push(answer4);
+  }
 
   const question = {
-    "title": title,
-    "color": color,
-    "answers": answers
-  }
-  questionsQuizz.push(question)
+    title: title,
+    color: color,
+    answers: answers,
+  };
+  questionsQuizz.push(question);
 
   return true;
 }
@@ -264,12 +275,10 @@ function hexadecimalIsValid(hexa) {
   return reg.test(hexa);
 }
 
-/*function urlIsValid(url) {
-  let re = new RegExp(
-    "^((http(s?)://(www.)?[a-z]+.com)|(magnet:?xt=urn:btih:))"
-  );
+function urlIsValid(url) {
+  let re = new RegExp("^((http(s?)://?)|(magnet:?xt=urn:btih:))");
   return re.test(url);
-}*/
+}
 
 function expandQuestion(id) {
   let element = document.querySelector(".q" + id);
@@ -284,29 +293,31 @@ function expandLevel(id) {
 function pass() {}
 
 function finishQuiz() {
-  levelQuizIsValid()
-  if(levelsQuizz.length === countLevels){
+  levelQuizIsValid();
+  if (levelsQuizz.length === countLevels) {
     objQuizz = {
-      "title": titleQuizz,
-      "image": imageQuizz,
-      "questions": questionsQuizz,
-      "levels": levelsQuizz
-    }
-    console.log(objQuizz)
-    const promisse = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objQuizz)
-    promisse.then(response => passQuizz(response.data))
-    renderFinishedQuizz()
-
-  }else{
-    alert("Preencha os campos corretamente.")
-    levelsQuizz = []
+      title: titleQuizz,
+      image: imageQuizz,
+      questions: questionsQuizz,
+      levels: levelsQuizz,
+    };
+    console.log(objQuizz);
+    const promisse = axios.post(
+      "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+      objQuizz
+    );
+    promisse.then((response) => passQuizz(response.data));
+    renderFinishedQuizz();
+  } else {
+    alert("Preencha os campos corretamente.");
+    levelsQuizz = [];
   }
 }
-let selectedQuizz = {}
+let selectedQuizz = {};
 
-function passQuizz(quizz){
-  selectedQuizz = quizz
-  console.log(selectedQuizz)
+function passQuizz(quizz) {
+  selectedQuizz = quizz;
+  console.log(selectedQuizz);
 }
 
 function levelQuizIsValid() {
@@ -328,43 +339,43 @@ function levelQuizIsValid() {
     if (levelPercentage > 100 || levelPercentage < 0) {
       return false;
     }
-    /*if (!urlIsValid(levelURL)) {
+    if (!urlIsValid(levelURL)) {
       return false;
-    }*/
+    }
 
     if (levelDesc.length < 30) {
       return false;
     }
 
     const level = {
-      "title":levelTitle,
-      "image": levelURL,
-      "text": levelDesc,
-      "minValue": levelPercentage
-    }
-    levelsQuizz.push(level)
+      title: levelTitle,
+      image: levelURL,
+      text: levelDesc,
+      minValue: levelPercentage,
+    };
+    levelsQuizz.push(level);
   }
   if (firstPercentage !== 0) {
     alert("O primeiro nível deve ser 0%");
     return false;
   }
-  
+
   return true;
 }
 
-function renderFinishedQuizz(){
-  fifthyScreen2.classList.add("hidden")
-  sixthScreen2.classList.remove("hidden")
+function renderFinishedQuizz() {
+  fifthyScreen2.classList.add("hidden");
+  sixthScreen2.classList.remove("hidden");
   sixthScreen2.innerHTML += ` 
     <div class="start-create">
-      <h3>Crie suas perguntas</h3>
+      <h3>Seu quizz está pronto!</h3>
     </div>
     <section>
       <div>
         <img src="${imageQuizz}">
         <text class="t1">${titleQuizz}</text>
       </div>                              
-      <button onclick="enterQuizzBySixthScreen(${selectedQuizz})">Acessar Quizz</button>
+      <button onclick="enterQuizzBySixthScreen(${titleQuizz})">Acessar Quizz</button>
       <text onclick="goToHome()" class="t2">Voltar para a home</text>
     </section>`;
 }

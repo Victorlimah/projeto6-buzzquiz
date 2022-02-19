@@ -40,10 +40,10 @@ function renderQuizzes(response) {
   });
 }
 
-function goToHome(){
+function goToHome() {
   sixthScreen.classList.add("hidden");
   firstScreen.classList.remove("hidden");
-  getQuizzes()
+  getQuizzes();
 }
 
 function enterQuizz(id) {
@@ -62,22 +62,22 @@ function enterQuizz(id) {
   renderQuestions(quizSelected.questions);
 }
 
-function enterQuizzBySixthScreen(quizz){
-  hiddenSixthScreen()
-  showSecondScreen()
-  //quizSelected = searchQuiz(id);
-  console.log(quizz)
+function enterQuizzBySixthScreen(title) {
+  hiddenSixthScreen();
+  showSecondScreen();
+  getQuizzes();
+  //tem que esperar a resposta do servidor
+  quizSelected = searchQuizByTitle(title);
+
   secondScreen.innerHTML = `
     <div class="bannerQuizz">
-      <img src="${quizz.image}">
-      <h3>${quizz.title}</h3>
+      <img src="${quizSelected.image}">
+      <h3>${quizSelected.title}</h3>
     </div>
     <div class="quizQuestions"></div>`;
-    renderQuestions(quizz.questions);
+  renderQuestions(quizSelected.questions);
 }
-exports = {
-  enterQuizzBySixthScreen: enterQuizzBySixthScreen,
-};
+
 function renderQuestions(questions) {
   const quizQuestions = document.querySelector(".quizQuestions");
   for (let i = 0; i < questions.length; i++) {
@@ -218,6 +218,14 @@ function resetGame() {
 function searchQuiz(id) {
   for (let i = 0; i < arrayQuizzes.length; i++) {
     if (id == arrayQuizzes[i].id) {
+      return arrayQuizzes[i];
+    }
+  }
+}
+
+function searchQuizByTitle(title) {
+  for (let i = 0; i < arrayQuizzes.length; i++) {
+    if (id == arrayQuizzes[i].title) {
       return arrayQuizzes[i];
     }
   }

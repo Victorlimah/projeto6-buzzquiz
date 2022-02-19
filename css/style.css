@@ -285,10 +285,10 @@ header {
   margin-top: 107px;
 }
 
-.sixthScreen .start-create{
+.sixthScreen .start-create {
   margin-top: 73px;
 }
-.sixthScreen section{
+.sixthScreen section {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -303,10 +303,15 @@ header {
   height: 266px;
   left: 470px;
   top: 213px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.5) 65.62%, rgba(0, 0, 0, 0.8) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.5) 65.62%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
   border-radius: 5px;
 }
-.sixthScreen button{
+.sixthScreen button {
   border: none;
   width: 350px;
   height: 54px;
@@ -324,7 +329,7 @@ header {
   color: #fff5f4;
   cursor: pointer;
 }
-.sixthScreen text{
+.sixthScreen text {
   width: 219.64px;
   height: 44px;
   font-family: Roboto;
@@ -338,13 +343,17 @@ header {
   color: #818181;
   cursor: pointer;
 }
-.sixthScreen .t1{
-  color: #FFFFFF;
+.sixthScreen .t1 {
+  color: #ffffff;
   position: absolute;
   left: 23px;
   bottom: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
 }
-.sixthScreen .t2{
+.sixthScreen .t2 {
   margin-left: 65px;
 }
 /* CLASSES SUPORT */
