@@ -62,19 +62,22 @@ function enterQuizz(id) {
   renderQuestions(quizSelected.questions);
 }
 
-function enterQuizzBySixthScreen(id){
+function enterQuizzBySixthScreen(quizz){
   hiddenSixthScreen()
   showSecondScreen()
-  quizSelected = searchQuiz(id);
+  //quizSelected = searchQuiz(id);
+  console.log(quizz)
   secondScreen.innerHTML = `
     <div class="bannerQuizz">
-      <img src="${quizSelected.image}">
-      <h3>${quizSelected.title}</h3>
+      <img src="${quizz.image}">
+      <h3>${quizz.title}</h3>
     </div>
     <div class="quizQuestions"></div>`;
-    renderQuestions(quizSelected.questions);
+    renderQuestions(quizz.questions);
 }
-
+exports = {
+  enterQuizzBySixthScreen: enterQuizzBySixthScreen,
+};
 function renderQuestions(questions) {
   const quizQuestions = document.querySelector(".quizQuestions");
   for (let i = 0; i < questions.length; i++) {

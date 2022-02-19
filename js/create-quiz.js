@@ -294,7 +294,7 @@ function finishQuiz() {
     }
     console.log(objQuizz)
     const promisse = axios.post('https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes', objQuizz)
-    promisse.then(response => passQuizzId(response.data.id))
+    promisse.then(response => passQuizz(response.data))
     renderFinishedQuizz()
 
   }else{
@@ -302,11 +302,11 @@ function finishQuiz() {
     levelsQuizz = []
   }
 }
-let selectedQuizzId = undefined
+let selectedQuizz = {}
 
-function passQuizzId(id){
-  selectedQuizzId = id
-  console.log(selectedQuizzId)
+function passQuizz(quizz){
+  selectedQuizz = quizz
+  console.log(selectedQuizz)
 }
 
 function levelQuizIsValid() {
@@ -364,8 +364,7 @@ function renderFinishedQuizz(){
         <img src="${imageQuizz}">
         <text class="t1">${titleQuizz}</text>
       </div>                              
-      <button onclick="enterQuizzBySixthScreen(${selectedQuizzId})">Acessar Quizz</button>
+      <button onclick="enterQuizzBySixthScreen(${selectedQuizz})">Acessar Quizz</button>
       <text onclick="goToHome()" class="t2">Voltar para a home</text>
     </section>`;
 }
-
