@@ -232,6 +232,8 @@ function resetQuizzes() {
 function resetGame() {
   score = 0;
   clicks = 0;
+  heigthScrool = 0;
+  quest = 0;
 }
 
 function searchQuiz(id) {
