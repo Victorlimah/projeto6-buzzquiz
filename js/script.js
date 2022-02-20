@@ -1,4 +1,5 @@
 const elementMyQuizzes = document.querySelector(".myQuizz");
+const listMyQuizzes = document.querySelector("#quizStorage");
 const elementAllQuizzes = document.querySelector(".allQuizz");
 const firstScreen = document.querySelector(".firstScreen");
 const secondScreen = document.querySelector(".secondScreen");
@@ -20,24 +21,26 @@ let quest = 0; // Número da questão que tá sendo respondida
 let heigthScrool = 0; // Tamanho da section para fazer scrool
 
 function renderMyQuizzes() {
-  if (arrayUserQuizzes.length !== 0) {
+  if (arrayUserQuizzes.length === 0) {
     elementMyQuizzes.innerHTML = `
         <article>
           <h3>Você ainda não criou nenhum quizz ainda :(</h3>
           <button onclick="createQuizz()">Criar Quizz</button>
         </article>`;
   } else {
-    elementMyQuizzes.innerHTML = `
-        <h3 class="bannerQuizz" >Seus Quizzes</h3>
+    listMyQuizzes.innerHTML = `
+      <div id="infoMyQuizz">
+        <h3>Seus Quizzes</h3>
           <span onclick="createQuizz()">
             <ion-icon name="add-circle-sharp"></ion-icon>
-          </span>`;
+          </span>
+        </div>`;
 
     let id = null;
     arrayUserQuizzes.forEach((quiz) => {
       id = quiz.id;
-      elementMyQuizzes.innerHTML += `
-      <div class="bannerQuizz" onclick="enterQuizz(${id})">
+      listMyQuizzes.innerHTML += `
+      <div id="imgMyQuizzes" onclick="enterQuizz(${id})">
       <img src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
@@ -54,16 +57,13 @@ function getUserQuizzes() {
     for (let quiz of localQuizz) {
       arrayUserQuizzes.push(quiz);
     }
+    renderMyQuizzes();
   }
-
-  renderMyQuizzes();
 }
-
-getUserQuizzes();
 getQuizzes();
+getUserQuizzes();
 
 function getQuizzes() {
-  elementAllQuizzes.innerHTML = `<h3>Todos os Quizzes</h3>`;
   const promise = axios.get(
     "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
   );
@@ -76,10 +76,11 @@ function getQuizzes() {
 function renderQuizzes(response) {
   arrayQuizzes = response.data;
   let id = null;
+  elementAllQuizzes.innerHTML = `<h3>Todos os Quizzes</h3>`;
   arrayQuizzes.forEach((quiz) => {
     id = quiz.id;
     elementAllQuizzes.innerHTML += `
-      <div class="bannerQuizz" onclick="enterQuizz(${id})">
+      <div class="bannerQuizz bannerHomeQuizz" onclick="enterQuizz(${id})">
       <img src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
