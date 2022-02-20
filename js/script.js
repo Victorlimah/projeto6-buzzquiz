@@ -22,7 +22,7 @@ let quest = 0; // Número da questão que tá sendo respondida
 let heigthScrool = 0; // Tamanho da section para fazer scrool
 
 function renderMyQuizzes() {
-  if (arrayUserQuizzes.length === 0) {
+  if (arrayUserQuizzes.length < 2) {
     elementMyQuizzes.innerHTML = `
         <article>
           <h3>Você ainda não criou nenhum quizz ainda :(</h3>
@@ -39,30 +39,24 @@ function renderMyQuizzes() {
 
     let id = null;
     arrayUserQuizzes.forEach((quiz) => {
-      id = quiz.id;
-      listMyQuizzes.innerHTML += `
+      if (quiz.title !== "gambiarra") {
+        id = quiz.id;
+        listMyQuizzes.innerHTML += `
       <div id="imgMyQuizzes" onclick="enterQuizz(${id})">
       <img src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
+      }
     });
   }
 }
 
 function getUserQuizzes() {
   let localQuizz = JSON.parse(localStorage.userQuizzess);
-  if (localQuizz.length === 0) {
-    pass();
-  } else {
-    arrayQuizzes = [];
-    for (let quiz of localQuizz) {
-      arrayUserQuizzes.push(quiz);
-    }
-  }
+  arrayUserQuizzes = localQuizz;
+
   renderMyQuizzes();
 }
-getQuizzes();
-getUserQuizzes();
 
 function getQuizzes() {
   const promise = axios.get(
@@ -350,13 +344,91 @@ function createQuizz() {
 // FUNÇÕES DO LOCAL STORAGE
 
 function passQuizz(quizz) {
-  selectedQuizz = quizz;
-  saveQuizzToLocalStorage(selectedQuizz);
+  saveQuizzToLocalStorage(quizz);
 }
 
 const saveQuizzToLocalStorage = (quizz) => {
+  console.log("adicionando quiz aos users");
   arrayUserQuizzes.push(quizz);
   const quizzJSON = JSON.stringify(arrayUserQuizzes);
   localStorage.setItem("userQuizzess", quizzJSON);
   getUserQuizzes();
 };
+
+/* GAMBIARRA HORRIVEL */
+
+let objGambiarra = {
+  title: "gambiarra",
+  image: "https://http.cat/411.jpg",
+  questions: [
+    {
+      title: "Título da pergunta 1",
+      color: "#123456",
+      answers: [
+        {
+          text: "Texto da resposta 1",
+          image: "https://http.cat/411.jpg",
+          isCorrectAnswer: true,
+        },
+        {
+          text: "Texto da resposta 2",
+          image: "https://http.cat/412.jpg",
+          isCorrectAnswer: false,
+        },
+      ],
+    },
+    {
+      title: "Título da pergunta 2",
+      color: "#123456",
+      answers: [
+        {
+          text: "Texto da resposta 1",
+          image: "https://http.cat/411.jpg",
+          isCorrectAnswer: true,
+        },
+        {
+          text: "Texto da resposta 2",
+          image: "https://http.cat/412.jpg",
+          isCorrectAnswer: false,
+        },
+      ],
+    },
+    {
+      title: "Título da pergunta 3",
+      color: "#123456",
+      answers: [
+        {
+          text: "Texto da resposta 1",
+          image: "https://http.cat/411.jpg",
+          isCorrectAnswer: true,
+        },
+        {
+          text: "Texto da resposta 2",
+          image: "https://http.cat/412.jpg",
+          isCorrectAnswer: false,
+        },
+      ],
+    },
+  ],
+  levels: [
+    {
+      title: "Título do nível 1",
+      image: "https://http.cat/411.jpg",
+      text: "Descrição do nível 1",
+      minValue: 0,
+    },
+    {
+      title: "Título do nível 2",
+      image: "https://http.cat/412.jpg",
+      text: "Descrição do nível 2",
+      minValue: 50,
+    },
+  ],
+};
+
+if (localStorage.userQuizzes === null) {
+  saveQuizzToLocalStorage(objGambiarra);
+}
+
+getQuizzes();
+getUserQuizzes();
