@@ -1,7 +1,8 @@
 /* TELA 3.0 */
 .thirdScreen,
 .fourthScreen,
-.fifthyScreen {
+.fifthyScreen,
+.sixthScreen {
   width: 100vw;
   margin-top: 80px;
 }
@@ -57,7 +58,7 @@
   color: #bababa;
 }
 
-.basic-info-quiz button{
+.basic-info-quiz button {
   border: none;
   width: 350px;
   height: 54px;

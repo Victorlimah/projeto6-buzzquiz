@@ -43,7 +43,7 @@ function checkInformations(title, image, numberQuestions, numberLevels) {
   lengthTitle ? (confirmInformations = false) : pass();
   numberQuestions <= 2 ? (confirmInformations = false) : pass();
   numberLevels <= 1 ? (confirmInformations = false) : pass();
-  //!urlIsValid(image) ? (confirmInformations = false) : pass();
+  !urlIsValid(image) ? (confirmInformations = false) : pass();
 
   // Não sei pra que é usado esse obj basic informations
 
@@ -137,7 +137,6 @@ function getQuestionInformations() {
   }
 
   if (questionsQuizz.length === countQuestion) {
-    console.log(questionsQuizz);
     renderLevelsInformations();
   } else {
     alert("Dados inválidos");
@@ -375,7 +374,7 @@ function renderFinishedQuizz() {
         <img src="${imageQuizz}">
         <text class="t1">${titleQuizz}</text>
       </div>                              
-      <button onclick="enterQuizzBySixthScreen(${titleQuizz})">Acessar Quizz</button>
+      <button onclick="enterQuizzBySixthScreen(${selectedQuizz})">Acessar Quizz</button>
       <text onclick="goToHome()" class="t2">Voltar para a home</text>
     </section>`;
 }

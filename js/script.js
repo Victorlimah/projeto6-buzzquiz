@@ -62,12 +62,17 @@ function enterQuizz(id) {
   renderQuestions(quizSelected.questions);
 }
 
-function enterQuizzBySixthScreen(title) {
+exports = {
+  enterQuizzBySixthScreen: enterQuizzBySixthScreen,
+};
+
+function enterQuizzBySixthScreen(quiz) {
   hiddenSixthScreen();
   showSecondScreen();
-  getQuizzes();
+  //getQuizzes();
+  arrayQuizzes.unshift(quiz);
   //tem que esperar a resposta do servidor
-  quizSelected = searchQuizByTitle(title);
+  quizSelected = searchQuiz(quiz.id);
 
   secondScreen.innerHTML = `
     <div class="bannerQuizz">
