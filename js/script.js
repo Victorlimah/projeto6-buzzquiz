@@ -52,14 +52,14 @@ function renderMyQuizzes() {
 function getUserQuizzes() {
   let localQuizz = JSON.parse(localStorage.userQuizzess);
   if (localQuizz.length === 0) {
-    return false;
+    pass();
   } else {
     arrayQuizzes = [];
     for (let quiz of localQuizz) {
       arrayUserQuizzes.push(quiz);
     }
-    renderMyQuizzes();
   }
+  renderMyQuizzes();
 }
 getQuizzes();
 getUserQuizzes();
@@ -87,7 +87,7 @@ function renderQuizzes(response) {
       </div>`;
   });
   loadInit.classList.add("hidden");
-  showFirstScreen() ;
+  showFirstScreen();
 }
 
 function goToHome() {
