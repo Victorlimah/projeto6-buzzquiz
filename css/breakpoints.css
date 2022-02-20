@@ -7,11 +7,19 @@
     text-align: center;
   }
 
+  #infoMyQuizz {
+    justify-content: center;
+  }
+
   .myQuizz h3 {
-    margin: 28px auto 22px auto;
+    margin: 28px 0 22px 0;
   }
   .myQuizz button {
     margin: 0 auto 30px auto;
+  }
+
+  #quizStorage {
+    justify-content: space-evenly;
   }
 }
 
@@ -21,6 +29,10 @@
   }
   .myQuizz button {
     margin: 0 auto 20px auto;
+  }
+
+  #infoMyQuizz {
+    justify-content: center;
   }
 }
 

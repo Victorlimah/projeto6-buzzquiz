@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
   overflow-x: hidden;
-  /*overflow-y: hidden;*/
 }
 * ::-webkit-scrollbar {
   display: none;
@@ -50,56 +49,6 @@ header {
 
 /* MY QUIZZ */
 
-/*
-.myQuizz,
-#quizStorage {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  justify-content: space-between;
-}
-
-.myQuizz article {
-  border: 1px dashed #d5d5d5;
-  margin: 100px auto 25px auto;
-  position: relative;
-  width: 100%;
-}
-
-.text-not-quizz {
-  width: 300px;
-  margin: 40px auto 40px auto;
-  font-size: 20px;
-  line-height: 23px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #b9b9b9;
-}
-
-.myQuizz span {
-  font-size: 50px;
-  color: #ec362d;
-}
-.myQuizz button {
-  margin: 0 auto 40px auto;
-  font-size: 18px;
-  line-height: 25px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  border: 1px dashed #ec362d;
-  box-sizing: border-box;
-  border-radius: 50px;
-  color: #ec362d;
-  background: #fafafa;
-}
-
-*/
-
-/* REFAZENDO MYQUIZZ */
-
 .myQuizz {
   display: flex;
   flex-direction: column;
@@ -147,10 +96,9 @@ header {
   margin-top: 83px;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
-
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 #infoMyQuizz {
@@ -175,7 +123,6 @@ header {
   color: #ec362d;
 }
 #imgMyQuizzes {
-  background-color: purple;
   width: 340px;
   height: 181px;
   position: relative;
@@ -201,14 +148,12 @@ header {
   position: absolute;
 }
 
-/* CLASSES QUANDO TIVER QUIZ DO USER */
-
 /* ALL QUIZZES*/
 .allQuizz {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .allQuizz h3:first-child {
@@ -222,7 +167,6 @@ header {
 .allQuizz div {
   width: 340px;
   height: 181px;
-  /*margin: 0 auto 25px auto;*/
   position: relative;
   background: linear-gradient(
     180deg,
@@ -237,7 +181,6 @@ header {
   height: 181px;
   object-fit: cover;
   border-radius: 5px;
-  /* filter: brightness(60%);*/
 }
 
 .allQuizz div h3 {
