@@ -84,19 +84,6 @@
   }
 }
 
-@media (max-width: 760px) {
-  .myQuizz h3 {
-    margin: 22px auto 18px auto;
-  }
-  .myQuizz button {
-    margin: 0 auto 20px auto;
-  }
-
-  #infoMyQuizz {
-    justify-content: center;
-  }
-}
-
 @media (max-width: 650px) {
   .basic-info-quiz button {
     width: 75%;

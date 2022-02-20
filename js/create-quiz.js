@@ -268,7 +268,8 @@ function inputEmpty(input) {
 }
 function hexadecimalIsValid(hexa) {
   let reg = /^#([0-9a-f]{3}){1,2}$/i;
-  return reg.test(hexa);
+  let lengthHexa = hexa.length === 7;
+  return reg.test(hexa) && lengthHexa;
 }
 
 function urlIsValid(url) {

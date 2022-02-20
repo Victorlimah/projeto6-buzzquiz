@@ -13,6 +13,36 @@ body {
   align-items: center;
 }
 
+/* LOADING */
+
+.load-init {
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.load-init h2 {
+  font-size: 37px;
+  line-height: 43px;
+  color: #ec362d;
+}
+
+.spinner {
+  height: 50px;
+  width: 50px;
+  margin-top: 10px;
+  border: 8px solid #ffffff;
+  border-left-color: #cf2b2b;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* HEADER */
 header {
   width: 100vw;
@@ -98,7 +128,7 @@ header {
   flex-wrap: wrap;
   flex-direction: row;
   gap: 10px;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 #infoMyQuizz {
@@ -153,7 +183,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .allQuizz h3:first-child {

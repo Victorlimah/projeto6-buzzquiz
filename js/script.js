@@ -1,3 +1,4 @@
+const loadInit = document.querySelector(".load-init");
 const elementMyQuizzes = document.querySelector(".myQuizz");
 const listMyQuizzes = document.querySelector("#quizStorage");
 const elementAllQuizzes = document.querySelector(".allQuizz");
@@ -85,6 +86,8 @@ function renderQuizzes(response) {
         <h3>${quiz.title}</h3> 
       </div>`;
   });
+  loadInit.classList.add("hidden");
+  showFirstScreen() ;
 }
 
 function goToHome() {
