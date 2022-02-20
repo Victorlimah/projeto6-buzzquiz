@@ -21,18 +21,21 @@
   #quizStorage {
     justify-content: space-evenly;
   }
-}
 
-@media (max-width: 760px) {
-  .myQuizz h3 {
-    margin: 22px auto 18px auto;
+  .image-description {
+    flex-direction: column;
+    align-items: center;
   }
-  .myQuizz button {
-    margin: 0 auto 20px auto;
+  .image-result {
+    width: 100%;
+  }
+  .description-result {
+    width: 100%;
+    text-align: center;
   }
 
-  #infoMyQuizz {
-    justify-content: center;
+  .answers {
+    justify-content: space-between;
   }
 }
 
@@ -41,8 +44,6 @@
     font-size: 19px;
     line-height: 22px;
   }
-
-  /* FALTA CRIAR A RESPONSIVIDADE DA TELA 2 PQ OS TAMANHOS ESTÃO FIXOS */
 
   .quizQuestions section .questionTitle {
     font-size: 19px;
@@ -62,6 +63,38 @@
     font-size: 18px;
     line-height: 21px;
   }
+
+  .quizQuestions section {
+    width: 50%;
+  }
+
+  .answer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quizQuestions .answers .answerOption img {
+    width: 163px;
+    height: 113px;
+  }
+
+  .description-result {
+    font-size: 17px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .myQuizz h3 {
+    margin: 22px auto 18px auto;
+  }
+  .myQuizz button {
+    margin: 0 auto 20px auto;
+  }
+
+  #infoMyQuizz {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 650px) {
@@ -73,6 +106,9 @@
 }
 
 @media (max-width: 375px) {
+  .bannerQuizz {
+    width: 100%;
+  }
   .sixthScreen section img {
     width: 340px;
     height: 181px;
@@ -82,5 +118,19 @@
   }
   .sixthScreen section text {
     font-size: 18px;
+  }
+}
+
+/*  SEM ISSO RESPOSIVIDADE DO BANNER TAVA BUGANDO */
+
+@media (max-width: 820px) {
+  .bannerQuizz {
+    width: 100vw;
+  }
+}
+
+@media (max-width: 670px) {
+  .bannerQuizz {
+    width: 100%;
   }
 }
