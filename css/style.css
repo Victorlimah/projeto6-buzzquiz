@@ -286,7 +286,7 @@ header {
 }
 
 .sixthScreen .start-create {
-  margin-top: 73px;
+  margin-bottom: 18px;
 }
 .sixthScreen section {
   width: 100%;
@@ -356,6 +356,7 @@ header {
 .sixthScreen .t2 {
   margin-left: 65px;
 }
+
 /* CLASSES SUPORT */
 .hidden {
   display: none;

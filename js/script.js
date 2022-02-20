@@ -10,6 +10,7 @@ let arrayQuizzes = null;
 let lengthAnswers = null;
 let lengthQuestions = null;
 let quizSelected = null;
+let quizSixtScreen = null;
 
 let score = 0; // Número de questões certas
 let clicks = 0; // Número de cliques em questão
@@ -66,14 +67,27 @@ exports = {
   enterQuizzBySixthScreen: enterQuizzBySixthScreen,
 };
 
-function enterQuizzBySixthScreen(quiz) {
+function enterQuizzBySixthScreen(title) {
   hiddenSixthScreen();
   showSecondScreen();
-  //getQuizzes();
-  arrayQuizzes.unshift(quiz);
+  quizSixtScreen = title;
+  refreshQuizzes();
   //tem que esperar a resposta do servidor
-  quizSelected = searchQuiz(quiz.id);
+}
 
+function refreshQuizzes() {
+  const promise = axios.get(
+    "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes"
+  );
+  promise.then(refreshSucess);
+  promise.catch(() => {
+    alert("Fail render quizzes!");
+  });
+}
+
+function refreshSucess(response) {
+  arrayQuizzes = response.data;
+  quizSelected = searchQuizByTitle(quizSixtScreen);
   secondScreen.innerHTML = `
     <div class="bannerQuizz">
       <img src="${quizSelected.image}">
@@ -230,7 +244,7 @@ function searchQuiz(id) {
 
 function searchQuizByTitle(title) {
   for (let i = 0; i < arrayQuizzes.length; i++) {
-    if (id == arrayQuizzes[i].title) {
+    if (title === arrayQuizzes[i].title) {
       return arrayQuizzes[i];
     }
   }

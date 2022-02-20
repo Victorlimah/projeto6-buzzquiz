@@ -374,7 +374,7 @@ function renderFinishedQuizz() {
         <img src="${imageQuizz}">
         <text class="t1">${titleQuizz}</text>
       </div>                              
-      <button onclick="enterQuizzBySixthScreen(${selectedQuizz})">Acessar Quizz</button>
+      <button onclick="enterQuizzBySixthScreen('${titleQuizz}')">Acessar Quizz</button>
       <text onclick="goToHome()" class="t2">Voltar para a home</text>
     </section>`;
 }
