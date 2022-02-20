@@ -6,6 +6,22 @@
   .allQuizz h3:first-child {
     text-align: center;
   }
+
+  .myQuizz h3 {
+    margin: 28px auto 22px auto;
+  }
+  .myQuizz button {
+    margin: 0 auto 30px auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .myQuizz h3 {
+    margin: 22px auto 18px auto;
+  }
+  .myQuizz button {
+    margin: 0 auto 20px auto;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -15,7 +31,7 @@
   }
 
   /* FALTA CRIAR A RESPONSIVIDADE DA TELA 2 PQ OS TAMANHOS ESTÃO FIXOS */
-  
+
   .quizQuestions section .questionTitle {
     font-size: 19px;
     line-height: 22px;
@@ -45,14 +61,14 @@
 }
 
 @media (max-width: 375px) {
-  .sixthScreen section img{
+  .sixthScreen section img {
     width: 340px;
     height: 181px;
   }
-  .sixthScreen section button{
+  .sixthScreen section button {
     width: 220px;
   }
-  .sixthScreen section text{
+  .sixthScreen section text {
     font-size: 18px;
   }
 }

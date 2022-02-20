@@ -50,15 +50,24 @@ header {
 
 /* MY QUIZZ */
 
-.myQuizz div {
+.myQuizz {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.myQuizz article {
   border: 1px dashed #d5d5d5;
   margin: 100px auto 25px auto;
   position: relative;
+  width: 100%;
 }
 
 .myQuizz h3 {
   width: 300px;
-  margin: 30px auto 50px auto;
+  margin: 40px auto 40px auto;
   font-size: 20px;
   line-height: 23px;
   display: flex;
@@ -75,6 +84,7 @@ header {
   right: 25px;
 }
 .myQuizz button {
+  margin: 0 auto 40px auto;
   font-size: 18px;
   line-height: 25px;
   display: flex;
