@@ -18,6 +18,21 @@ let clicks = 0; // Número de cliques em questão
 let quest = 0; // Número da questão que tá sendo respondida
 let heigthScrool = 0; // Tamanho da section para fazer scrool
 
+function getUserQuizzes() {
+  let localQuizz = JSON.parse(localStorage.userQuizzess);
+  if (localQuizz.length === 0) {
+    return false;
+  } else {
+    arrayQuizzes = [];
+    for (let quiz of localQuizz) {
+      arrayUserQuizzes.push(quiz);
+    }
+  }
+}
+
+getUserQuizzes();
+getQuizzes();
+
 function getQuizzes() {
   elementAllQuizzes.innerHTML = `<h3>Todos os Quizzes</h3>`;
   const promise = axios.get(
@@ -64,16 +79,11 @@ function enterQuizz(id) {
   renderQuestions(quizSelected.questions);
 }
 
-exports = {
-  enterQuizzBySixthScreen: enterQuizzBySixthScreen,
-};
-
 function enterQuizzBySixthScreen(title) {
   hiddenSixthScreen();
   showSecondScreen();
   quizSixtScreen = title;
   refreshQuizzes();
-  //tem que esperar a resposta do servidor
 }
 
 function refreshQuizzes() {
@@ -299,16 +309,12 @@ function hiddenSixthScreen() {
 
 function pass() {}
 
-getQuizzes();
-
-/* CREATE QUIZZ */
 function createQuizz() {
   hiddenFirstScreen();
   showThirdScreen();
 }
 
-//INFORMAÇÕES DA TELA 3.1
-// MOVIDOS PARA OUTRO ARQUIVO JS
+// FUNÇÕES DO LOCAL STORAGE
 
 function passQuizz(quizz) {
   selectedQuizz = quizz;
@@ -318,6 +324,6 @@ function passQuizz(quizz) {
 const saveQuizzToLocalStorage = (quizz) => {
   arrayUserQuizzes.push(quizz);
   const quizzJSON = JSON.stringify(arrayUserQuizzes);
-
   localStorage.setItem("userQuizzess", quizzJSON);
+  getUserQuizzes();
 };

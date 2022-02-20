@@ -176,9 +176,6 @@ function infoQuestionsIsValid(
     return false;
   }
 
-  // PERGUNTAS 2 E 3 PODEM SER VAZIAS
-  // Mas se não forem, temos que testar
-
   let answer3Exist = !inputEmpty(wrongAnswer2);
   let answer4Exist = !inputEmpty(wrongAnswer3);
 
