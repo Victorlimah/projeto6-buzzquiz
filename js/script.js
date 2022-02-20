@@ -7,6 +7,7 @@ const fifthyScreen = document.querySelector(".fifthyScreen");
 const sixthScreen = document.querySelector(".sixthScreen");
 
 let arrayQuizzes = null;
+let arrayUserQuizzes = [];
 let lengthAnswers = null;
 let lengthQuestions = null;
 let quizSelected = null;
@@ -308,3 +309,15 @@ function createQuizz() {
 
 //INFORMAÇÕES DA TELA 3.1
 // MOVIDOS PARA OUTRO ARQUIVO JS
+
+function passQuizz(quizz) {
+  selectedQuizz = quizz;
+  saveQuizzToLocalStorage(selectedQuizz);
+}
+
+const saveQuizzToLocalStorage = (quizz) => {
+  arrayUserQuizzes.push(quizz);
+  const quizzJSON = JSON.stringify(arrayUserQuizzes);
+
+  localStorage.setItem("userQuizzess", quizzJSON);
+};

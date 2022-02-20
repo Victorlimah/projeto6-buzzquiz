@@ -314,11 +314,6 @@ function finishQuiz() {
 }
 let selectedQuizz = {};
 
-function passQuizz(quizz) {
-  selectedQuizz = quizz;
-  console.log(selectedQuizz);
-}
-
 function levelQuizIsValid() {
   let element = null;
   let firstPercentage = parseInt(document.querySelector(".percent0").value);
