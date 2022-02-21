@@ -51,8 +51,6 @@ function checkInformations(title, image, numberQuestions, numberLevels) {
     basicInformations = {
       title: title,
       image: image,
-      //numberQuestions: numberQuestions,
-      //numberLevels: numberLevels,
     };
 
     titleQuizz = title;
@@ -73,28 +71,28 @@ function renderCreateQuestions() {
       <div class="basic-info-quiz questions">
         <span class="question-title">
           <h3>Pergunta ${i + 1}</h3>
-          <img src="./images/icon-create.svg" onclick="expandQuestion(${i})">
+          <img data-identifier="expand src="./images/icon-create.svg" onclick="expandQuestion(${i})">
         </span>
 
         <div class="list-question q${i} hidden">
-          <input class="input-text-question" type="text" placeholder="Texto da pergunta" />
-          <input class="input-color-question" type="text" placeholder="Cor de fundo da pergunta" />
+          <input data-identifier="question" class="input-text-question" type="text" placeholder="Texto da pergunta" />
+          <input data-identifier="question" class="input-color-question" type="text" placeholder="Cor de fundo da pergunta" />
 
           <h3>Resposta correta</h3>
-          <input class="input-correct-answer" type="text" placeholder="Resposta correta" />
-          <input class="input-url-correct" type="text" placeholder="URL da imagem" />
+          <input data-identifier="question" class="input-correct-answer" type="text" placeholder="Resposta correta" />
+          <input data-identifier="question" class="input-url-correct" type="text" placeholder="URL da imagem" />
 
           <h3>Respostas Incorretas</h3>
-          <input class="input-wrong-answer1" type="text" placeholder="Resposta incorreta 1" />
-          <input class="input-url-wrong1" type="text" placeholder="URL da imagem 1" />
+          <input data-identifier="question" class="input-wrong-answer1" type="text" placeholder="Resposta incorreta 1" />
+          <input data-identifier="question" class="input-url-wrong1" type="text" placeholder="URL da imagem 1" />
 
           <div class="separator-wrong-answer"></div>
-          <input class="input-wrong-answer2 " type="text" placeholder="Resposta incorreta 2" />
-          <input class="input-url-wrong2" type="text" placeholder="URL da imagem 2" />
+          <input data-identifier="question" class="input-wrong-answer2 " type="text" placeholder="Resposta incorreta 2" />
+          <input data-identifier="question" class="input-url-wrong2" type="text" placeholder="URL da imagem 2" />
 
           <div class="separator-wrong-answer"></div>
-          <input class="input-wrong-answer3" type="text" placeholder="Resposta incorreta 3" />
-          <input class="input-url-wrong3" type="text" placeholder="URL da imagem 3" />
+          <input data-identifier="question" class="input-wrong-answer3" type="text" placeholder="Resposta incorreta 3" />
+          <input data-identifier="question" class="input-url-wrong3" type="text" placeholder="URL da imagem 3" />
         </div>
       </div>`;
   }
@@ -244,14 +242,14 @@ function renderLevelsInformations() {
     <div class="basic-info-quiz questions">
         <span class="question-title">
           <h3>Nível ${i + 1}</h3>
-          <img src="./images/icon-create.svg" onclick="expandLevel(${i})">
+          <img data-identifier="expand src="./images/icon-create.svg" onclick="expandLevel(${i})">
         </span>
 
         <div class="list-question l${i} hidden">
-          <input class="input-title-level" type="text" placeholder="Título do nível" />
-          <input class="input-percentage-level percent${i}" type="text" placeholder="% de acerto mínima" />
-          <input class="input-url-level" type="text" placeholder="URL da imagem do nível" />
-          <input class="input-description-level" type="text" placeholder="Descrição do nível" />
+          <input data-identifier="level" class="input-title-level" type="text" placeholder="Título do nível" />
+          <input data-identifier="level" class="input-percentage-level percent${i}" type="text" placeholder="% de acerto mínima" />
+          <input data-identifier="level" class="input-url-level" type="text" placeholder="URL da imagem do nível" />
+          <input data-identifier="level" class="input-description-level" type="text" placeholder="Descrição do nível" />
         </div>
     </div>`;
   }
