@@ -30,7 +30,7 @@ function renderMyQuizzes() {
     element.innerHTML = `
       <div id="infoMyQuizz">
         <h3>Seus Quizzes</h3>
-          <span onclick="createQuizz()">
+          <span data-identifier="create-quizz" onclick="createQuizz()">
             <ion-icon name="add-circle-sharp"></ion-icon>
           </span>
         </div>`;
@@ -39,9 +39,9 @@ function renderMyQuizzes() {
     arrayUserQuizzes.forEach((quiz) => {
       id = quiz.id;
       element.innerHTML += `
-      <div id="imgMyQuizzes">
+      <div id="imgMyQuizzes" data-identifier="user-quizzes">
        <ion-icon onclick="deleteMyQuiz(${id})" name="trash-sharp"></ion-icon>
-      <img onclick="enterQuizz(${id})" src="${quiz.image}" alt="image quiz ${quiz.id}">
+      <img data-identifier="quizz-card" onclick="enterQuizz(${id})" src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
     });
@@ -75,7 +75,7 @@ function renderQuizzes(response) {
   arrayQuizzes.forEach((quiz) => {
     id = quiz.id;
     elementAllQuizzes.innerHTML += `
-      <div class="bannerQuizz bannerHomeQuizz" onclick="enterQuizz(${id})">
+      <div data-identifier="quizz-card" class="bannerQuizz bannerHomeQuizz" onclick="enterQuizz(${id})">
       <img src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
@@ -142,7 +142,7 @@ function renderQuestions(questions) {
   for (let i = 0; i < questions.length; i++) {
     quizQuestions.innerHTML += `
       <section id="question${i}">
-        <div class="questionTitle" style="background-color:${questions[i].color}; color:white;">${questions[i].title}</div>
+        <div data-identifier="question" class="questionTitle" style="background-color:${questions[i].color}; color:white;">${questions[i].title}</div>
         <div class="answers answers-${i} ${i}"></div>
       </section>`;
     lengthAnswers = questions[i].answers;
@@ -155,7 +155,7 @@ function renderAnswers(answers, answersCod) {
   answers.sort(randomNumber);
   for (let i = 0; i < answers.length; i++) {
     questionAnwers.innerHTML += `
-      <div onclick="selectAnswer(this, ${answers[i].isCorrectAnswer})" class="answerOption ${answers[i].isCorrectAnswer}">
+      <div data-identifier="answer" onclick="selectAnswer(this, ${answers[i].isCorrectAnswer})" class="answerOption ${answers[i].isCorrectAnswer}">
         <img src="${answers[i].image}">
         <text>${answers[i].text}</text>                            
       </div>`;
@@ -226,7 +226,7 @@ function renderResult(id) {
   }
 
   quizQuestions.innerHTML += `
-      <section id="question${quizSelected.questions.length}" class="result">
+      <section data-identifier="quizz-result" id="question${quizSelected.questions.length}" class="result">
         <div class="questionTitle result-title">
           <span>${finalScore}% de acerto.&nbsp;</span>
           <span>${titleScore}</span>

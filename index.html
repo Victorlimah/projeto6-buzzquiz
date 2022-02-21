@@ -29,12 +29,12 @@
       <section class="myQuizz">
         <article>
           <h3>Você ainda não criou nenhum quizz ainda :(</h3>
-          <button onclick="createQuizz()">Criar Quizz</button>
+          <button data-identifier="create-quizz" onclick="createQuizz()">Criar Quizz</button>
         </article>
         <div id="quizStorage"></div>
       </section>
 
-      <section class="allQuizz"></section>
+      <section class="allQuizz" data-identifier="general-quizzes"></section>
     </section>
 
     <!-- SECTION TELA 2 ( QUIZZ SELECIONADO )-->
