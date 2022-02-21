@@ -1,6 +1,6 @@
 const loadInit = document.querySelector(".load-init");
 const elementMyQuizzes = document.querySelector(".myQuizz");
-const listMyQuizzes = document.querySelector("#quizStorage");
+const elementDontHaveQuiz = document.querySelector(".myQuizz article");
 const elementAllQuizzes = document.querySelector(".allQuizz");
 const firstScreen = document.querySelector(".firstScreen");
 const secondScreen = document.querySelector(".secondScreen");
@@ -11,6 +11,7 @@ const sixthScreen = document.querySelector(".sixthScreen");
 
 let arrayQuizzes = null;
 let arrayUserQuizzes = [];
+let arrayObjUserQuizzes = [];
 let lengthAnswers = null;
 let lengthQuestions = null;
 let quizSelected = null;
@@ -20,16 +21,13 @@ let score = 0; // Número de questões certas
 let clicks = 0; // Número de cliques em questão
 let quest = 0; // Número da questão que tá sendo respondida
 let heigthScrool = 0; // Tamanho da section para fazer scrool
+let existUserQuiz = false;
 
 function renderMyQuizzes() {
-  if (arrayUserQuizzes.length === 0) {
-    elementMyQuizzes.innerHTML = `
-        <article>
-          <h3>Você ainda não criou nenhum quizz ainda :(</h3>
-          <button onclick="createQuizz()">Criar Quizz</button>
-        </article>`;
-  } else {
-    listMyQuizzes.innerHTML = `
+  if (existUserQuiz) {
+    elementMyQuizzes.innerHTML = `<div id="quizStorage"></div>`;
+    let element = document.querySelector("#quizStorage");
+    element.innerHTML = `
       <div id="infoMyQuizz">
         <h3>Seus Quizzes</h3>
           <span onclick="createQuizz()">
@@ -40,9 +38,10 @@ function renderMyQuizzes() {
     let id = null;
     arrayUserQuizzes.forEach((quiz) => {
       id = quiz.id;
-      listMyQuizzes.innerHTML += `
-      <div id="imgMyQuizzes" onclick="enterQuizz(${id})">
-      <img src="${quiz.image}" alt="image quiz ${quiz.id}">
+      element.innerHTML += `
+      <div id="imgMyQuizzes">
+       <ion-icon onclick="deleteMyQuiz(${id})" name="trash-sharp"></ion-icon>
+      <img onclick="enterQuizz(${id})" src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
     });
@@ -50,19 +49,14 @@ function renderMyQuizzes() {
 }
 
 function getUserQuizzes() {
-  let localQuizz = JSON.parse(localStorage.userQuizzess);
-  if (localQuizz.length === 0) {
-    pass();
-  } else {
-    arrayQuizzes = [];
-    for (let quiz of localQuizz) {
-      arrayUserQuizzes.push(quiz);
+  for (let i = 0; i < arrayQuizzes.length; i++) {
+    if (localStorage.getItem(arrayQuizzes[i].id.toString())) {
+      arrayUserQuizzes.push(arrayQuizzes[i]);
+      existUserQuiz = true;
     }
   }
   renderMyQuizzes();
 }
-getQuizzes();
-getUserQuizzes();
 
 function getQuizzes() {
   const promise = axios.get(
@@ -88,12 +82,14 @@ function renderQuizzes(response) {
   });
   loadInit.classList.add("hidden");
   showFirstScreen();
+  getUserQuizzes();
 }
 
 function goToHome() {
   sixthScreen.classList.add("hidden");
   firstScreen.classList.remove("hidden");
   getQuizzes();
+  location.reload();
 }
 
 function enterQuizz(id) {
@@ -183,6 +179,8 @@ function selectAnswer(answer, isCorrect) {
   clicks === lengthQuestions ? setTimeout(renderResult, 2000) : pass();
 }
 
+getQuizzes();
+
 function scrollToNextQuestion() {
   let questions = document.querySelector("#question" + quest);
   let position = questions.getBoundingClientRect().height;
@@ -267,6 +265,7 @@ function backToHome() {
   hiddenThirdScreen();
   fourthScreen.classList.add("hidden");
   fifthyScreen.classList.add("hidden");
+  location.reload();
 }
 
 function resetQuizzes() {
@@ -293,6 +292,26 @@ function searchQuizByTitle(title) {
     if (title === arrayQuizzes[i].title) {
       return arrayQuizzes[i];
     }
+  }
+}
+
+function deleteMyQuiz(id) {
+  if (window.confirm("Você realmente deseja excluir seu Quizz?")) {
+    axios
+      .delete(
+        `https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes/${id.toString()}`,
+        {
+          headers: {
+            "Secret-Key": localStorage.getItem("k" + id.toString()),
+          },
+        }
+      )
+      .then(() => {
+        window.location.reload();
+        localStorage.removeItem(id.toString());
+        localStorage.removeItem("k" + id.toString());
+      })
+      .catch((response) => console.log(response));
   }
 }
 
@@ -346,17 +365,3 @@ function createQuizz() {
   hiddenFirstScreen();
   showThirdScreen();
 }
-
-// FUNÇÕES DO LOCAL STORAGE
-
-function passQuizz(quizz) {
-  selectedQuizz = quizz;
-  saveQuizzToLocalStorage(selectedQuizz);
-}
-
-const saveQuizzToLocalStorage = (quizz) => {
-  arrayUserQuizzes.push(quizz);
-  const quizzJSON = JSON.stringify(arrayUserQuizzes);
-  localStorage.setItem("userQuizzess", quizzJSON);
-  getUserQuizzes();
-};

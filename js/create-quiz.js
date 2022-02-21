@@ -290,24 +290,37 @@ function expandLevel(id) {
 function pass() {}
 
 function finishQuiz() {
-  levelQuizIsValid();
-  if (levelsQuizz.length === countLevels) {
-    objQuizz = {
-      title: titleQuizz,
-      image: imageQuizz,
-      questions: questionsQuizz,
-      levels: levelsQuizz,
-    };
-    console.log(objQuizz);
-    const promisse = axios.post(
-      "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
-      objQuizz
-    );
-    promisse.then((response) => passQuizz(response.data));
-    renderFinishedQuizz();
+  if (levelQuizIsValid()) {
+    if (levelsQuizz.length === countLevels) {
+      objQuizz = {
+        title: titleQuizz,
+        image: imageQuizz,
+        questions: questionsQuizz,
+        levels: levelsQuizz,
+      };
+
+      axios
+        .post(
+          "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+          objQuizz
+        )
+        .then((response) => {
+          let userSendLocalStorage = JSON.stringify(objQuizz);
+          let secretKey = "k" + response.data.id.toString();
+          localStorage.setItem(
+            response.data.id.toString(),
+            userSendLocalStorage
+          );
+          3;
+          localStorage.setItem(secretKey, response.data.key.toString());
+          renderFinishedQuizz();
+        })
+        .catch(() => alert("Preencha os campos corretamente."));
+    } else {
+      levelsQuizz = [];
+    }
   } else {
-    alert("Preencha os campos corretamente.");
-    levelsQuizz = [];
+    alert("Dados inválidos!");
   }
 }
 let selectedQuizz = {};
@@ -370,4 +383,90 @@ function renderFinishedQuizz() {
       <button onclick="enterQuizzBySixthScreen('${titleQuizz}')">Acessar Quizz</button>
       <text onclick="goToHome()" class="t2">Voltar para a home</text>
     </section>`;
+}
+
+function gambiarraCriaQuiz(title) {
+  let objGambiarra = {
+    title: title,
+    image: "https://http.cat/411.jpg",
+    questions: [
+      {
+        title: "Título da pergunta 1",
+        color: "#123456",
+        answers: [
+          {
+            text: "Texto da resposta 1",
+            image: "https://http.cat/411.jpg",
+            isCorrectAnswer: true,
+          },
+          {
+            text: "Texto da resposta 2",
+            image: "https://http.cat/412.jpg",
+            isCorrectAnswer: false,
+          },
+        ],
+      },
+      {
+        title: "Título da pergunta 2",
+        color: "#123456",
+        answers: [
+          {
+            text: "Texto da resposta 1",
+            image: "https://http.cat/411.jpg",
+            isCorrectAnswer: true,
+          },
+          {
+            text: "Texto da resposta 2",
+            image: "https://http.cat/412.jpg",
+            isCorrectAnswer: false,
+          },
+        ],
+      },
+      {
+        title: "Título da pergunta 3",
+        color: "#123456",
+        answers: [
+          {
+            text: "Texto da resposta 1",
+            image: "https://http.cat/411.jpg",
+            isCorrectAnswer: true,
+          },
+          {
+            text: "Texto da resposta 2",
+            image: "https://http.cat/412.jpg",
+            isCorrectAnswer: false,
+          },
+        ],
+      },
+    ],
+    levels: [
+      {
+        title: "Título do nível 1",
+        image: "https://http.cat/411.jpg",
+        text: "Descrição do nível 1",
+        minValue: 0,
+      },
+      {
+        title: "Título do nível 2",
+        image: "https://http.cat/412.jpg",
+        text: "Descrição do nível 2",
+        minValue: 50,
+      },
+    ],
+  };
+
+  axios
+    .post(
+      "https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes",
+      objGambiarra
+    )
+    .then((response) => {
+      let userSendLocalStorage = JSON.stringify(objGambiarra);
+      let secretKey = "k" + response.data.id.toString();
+      localStorage.setItem(response.data.id.toString(), userSendLocalStorage);
+      3;
+      localStorage.setItem(secretKey, response.data.key.toString());
+      renderFinishedQuizz();
+      location.reload();
+    });
 }

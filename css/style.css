@@ -87,7 +87,7 @@ header {
 
 .myQuizz article {
   border: 1px dashed #d5d5d5;
-  margin: 100px auto 25px auto;
+  margin: 100px auto 0 auto;
   position: relative;
   width: 100%;
   display: flex;
@@ -156,6 +156,7 @@ header {
   width: 340px;
   height: 181px;
   position: relative;
+  margin-bottom: 30px;
 }
 
 #imgMyQuizzes img {
@@ -168,6 +169,17 @@ header {
   align-items: center;
 }
 
+#imgMyQuizzes ion-icon {
+  font-size: 25px;
+  background-color: #ec362d;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+  position: absolute;
+  right: 8px;
+  top: 10px;
+}
+
 #imgMyQuizzes h3 {
   font-size: 19px;
   line-height: 22px;
@@ -176,6 +188,7 @@ header {
   align-items: flex-end;
   color: #ffffff;
   position: absolute;
+  text-align: center;
 }
 
 /* ALL QUIZZES*/
@@ -192,7 +205,7 @@ header {
   font-weight: bold;
   font-size: 20px;
   line-height: 23px;
-  margin: 80px auto 20px auto;
+  margin: 0 auto 20px auto;
 }
 .allQuizz div {
   width: 340px;
@@ -220,6 +233,7 @@ header {
   display: flex;
   align-items: flex-end;
   color: #ffffff;
+  text-align: center;
 }
 
 /* QUIZZ SELECTED */
