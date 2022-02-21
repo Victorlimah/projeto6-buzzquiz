@@ -157,6 +157,8 @@ header {
   height: 181px;
   position: relative;
   margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #imgMyQuizzes img {
@@ -167,6 +169,7 @@ header {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  position: absolute;
 }
 
 #imgMyQuizzes ion-icon {
@@ -178,6 +181,7 @@ header {
   position: absolute;
   right: 8px;
   top: 10px;
+  z-index: 4;
 }
 
 #imgMyQuizzes h3 {
@@ -189,6 +193,21 @@ header {
   color: #ffffff;
   position: absolute;
   text-align: center;
+  position: absolute;
+  z-index: 2;
+}
+
+#imgMyQuizzes div {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.5) 64.58%,
+    #000000 100%
+  );
+  z-index: 2;
 }
 
 /* ALL QUIZZES*/
@@ -211,12 +230,6 @@ header {
   width: 340px;
   height: 181px;
   position: relative;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(0, 0, 0, 0.5) 64.58%,
-    #000000 100%
-  );
 }
 
 .allQuizz div img {
@@ -250,8 +263,31 @@ header {
 
 .bannerHomeQuizz {
   margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.bannerHomeQuizz img {
+  height: 181px;
+  position: absolute;
+}
+
+.bannerHomeQuizz h3 {
+  position: absolute;
+  z-index: 3;
+}
+
+.bannerHomeQuizz div {
+  position: relative;
+  height: 181px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(0, 0, 0, 0.5) 64.58%,
+    #000000 100%
+  );
+  z-index: 2;
+}
 .bannerQuizz img {
   width: 100%;
   object-fit: cover;

@@ -41,6 +41,7 @@ function renderMyQuizzes() {
       element.innerHTML += `
       <div id="imgMyQuizzes" data-identifier="user-quizzes">
        <ion-icon onclick="deleteMyQuiz(${id})" name="trash-sharp"></ion-icon>
+        <div class="filter-gradient"></div> 
       <img data-identifier="quizz-card" onclick="enterQuizz(${id})" src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
@@ -75,7 +76,8 @@ function renderQuizzes(response) {
   arrayQuizzes.forEach((quiz) => {
     id = quiz.id;
     elementAllQuizzes.innerHTML += `
-      <div data-identifier="quizz-card" class="bannerQuizz bannerHomeQuizz" onclick="enterQuizz(${id})">
+      <div data-identifier="quizz-card" class="bannerHomeQuizz" onclick="enterQuizz(${id})">
+       <div class="filter-gradient"></div> 
       <img src="${quiz.image}" alt="image quiz ${quiz.id}">
         <h3>${quiz.title}</h3> 
       </div>`;
