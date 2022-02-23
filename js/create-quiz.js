@@ -71,7 +71,7 @@ function renderCreateQuestions() {
       <div class="basic-info-quiz questions">
         <span class="question-title">
           <h3>Pergunta ${i + 1}</h3>
-          <img data-identifier="expand src="./images/icon-create.svg" onclick="expandQuestion(${i})">
+          <img data-identifier="expand" src="./images/icon-create.svg" onclick="expandQuestion(${i})">
         </span>
 
         <div class="list-question q${i} hidden">
@@ -242,7 +242,7 @@ function renderLevelsInformations() {
     <div class="basic-info-quiz questions">
         <span class="question-title">
           <h3>Nível ${i + 1}</h3>
-          <img data-identifier="expand src="./images/icon-create.svg" onclick="expandLevel(${i})">
+          <img data-identifier="expand" src="./images/icon-create.svg" onclick="expandLevel(${i})">
         </span>
 
         <div class="list-question l${i} hidden">
